@@ -65,7 +65,7 @@ def validate(
 The function has 6 possible parameters:
 - **data**: A list of crosslink-spectrum-matches or crosslinks to validate, or a `parser_result`.
 - **fdr**: The target FDR, must be given as a real number between `0` and `1`. The default of `0.01` corresponds to 1% FDR.
-- **formula**: One of `"D/T"`, `"(TD+DD)/TT"`, and `"(TD-DD)/TT"` denoting which formula to use to estimate FDR. `D` and `DD` denote decoy matches, `T` and `TT` denote target matches, and `TD` denotes target-decoy and decoy-target matches.
+- **formula**: One of `"D/T"`, `"(TD+DD)/TT"`, and `"(TD-DD)/TT"` denoting which formula to use to estimate FDR. `D` denotes any decoy matches including decoy-decoy, decoy-target and target-decoy matches. `DD` denotes decoy-decoy matches, `T` and `TT` denote target-target matches, and `TD` denotes target-decoy and decoy-target matches.
   - Options `"D/T"` and `"(TD+DD)/TT"` are the same and the standard way how MS Annika calculates FDR.
     - See references \[[1](https://doi.org/10.1021/acs.jproteome.0c01000), [2](https://doi.org/10.1038/s42004-024-01386-x)\].
   - Option `"(TD-DD)/TT"` is the formula suggested by xiFDR for directional crosslinks.
@@ -75,6 +75,12 @@ The function has 6 possible parameters:
 - **ignore_missing_labels**: If crosslinks and crosslink-spectrum-matches should be ignored if they don't have target and decoy labels. By default and error is thrown if any unlabelled data is encountered.
 
 Except for `data` all other parameters are optional with sensible defaults in place to stricly validate results. The `data` parameter supports lists of crosslink-spectrum-matches or crosslinks as input, or a complete `parser_result`. If a list of crosslink-spectrum-matches was provided, `validate()` will return a list of validated crosslink-spectrum-matches. If a list of crosslinks was provided, `validate()` will return a list of validated crosslinks. If a `parser_result` was provided, `validate()` will return a `parser_result` where all elements are validated.
+
+> [!CAUTION]
+>
+> **Please note that the by default selected FDR formula of 'D/T' actually denotes '(TD+DD)/TT' where 'TD' includes both 'TD' and 'DT' matches**
+> **since we consider any peptide pair with at least one decoy hit a decoy. Estimating FDR via 'DD/TT' is not valid for crosslinking mass spectrometry**
+> **as it severly underestimated the actual error and is therefore not supported by pyXLMS!**
 
 > [!IMPORTANT]
 >
