@@ -1,0 +1,820 @@
+import { Callout } from 'nextra/components'
+
+# \[Re-\]Annotating Decoy Labels
+
+If your crosslink-spectrum-matches or crosslinks have incorrect or missing decoy labels you might want to \[re-\]annotate them for down-stream analysis. The examples below show how to do that with the pyXLMS function `transform.reannotate_decoy_labels()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels)\].
+
+
+```python copy
+from pyXLMS import __version__
+
+print(f"Installed pyXLMS version: {__version__}")
+```
+<Callout emoji="✓">
+```
+    Installed pyXLMS version: 1.8.7
+```
+</Callout>
+
+
+```python copy
+from pyXLMS import data
+from pyXLMS import parser
+from pyXLMS import transform
+```
+
+All data transformation functionality - including `reannotate_decoy_labels()` to (re-)annotate decoy labels - is available via the `transform` submodule. We also import the `parser` submodule here for reading result files and `data` to manually create some crosslinks.
+
+
+```python copy
+parser_result = parser.read(
+    "../../data/ms_annika/XLpeplib_Beveridge_QEx-HFX_DSS_R1.pdResult",
+    engine="MS Annika",
+    crosslinker="DSS",
+)
+```
+<Callout emoji="✓">
+```
+    Reading MS Annika CSMs...: 100%|█████████████████████████████████████████████████████████████████████████████████| 826/826 [00:00<00:00, 8584.79it/s]
+    Reading MS Annika crosslinks...: 100%|██████████████████████████████████████████████████████████████████████████| 300/300 [00:00<00:00, 15749.51it/s]
+```
+</Callout>
+
+We read crosslink-spectrum-matches and crosslinks using the [generic parser](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read) from a single `.pdResult` file.
+
+
+```python copy
+csms = parser_result["crosslink-spectrum-matches"]
+xls = parser_result["crosslinks"]
+```
+
+For easier access we assign our crosslink-spectrum-matches (CSMs) to the variable `csms` and our crosslinks to the variable `xls`.
+
+> [!IMPORTANT]
+>
+> **\[Re-\]Annotation of crosslink-spectrum-matches, crosslinks, and `parser_results` works exactly the same, as demonstrated by the examples below.**
+
+## Decoy [Re-]Annotation `by_mapping`
+
+Any of the following are valid function calls:
+- `transform.reannotate_decoy_labels(csms, ...)`
+- `transform.reannotate_decoy_labels(xls, ...)`
+- `transform.reannotate_decoy_labels(parser_result, ...)`
+
+### [Re-]Annotating Crosslink-Spectrum-Matches
+
+
+```python copy
+csms_none = transform.reannotate_decoy_labels(
+    csms, by_mapping={True: None, False: None}
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by mapping: {True: None, False: None}!
+    Annotating crosslink-spectrum-matches...: 100%|████████████████████████████████████████████████████████████████████████████| 826/826 [00:00<?, ?it/s]
+```
+</Callout>
+
+We are actually using our `transform.reannotate_decoy_labels()` function here to create some dummy data without decoy labels. Passing `by_mapping={True: None, False: None}` to the function means we label anything that has `"alpha_decoy"` or `"beta_decoy"` with value `True` or `False` as `None`. In reality one would of course rather use something like `by_mapping={None: False}` which would label all data with `"alpha_decoy"` or `"beta_decoy"` being `None` to `False` (meaning they would be considered target hits). This could be useful if you read results from a search engine that does not label their CSMs or crosslinks but you know that all of them are target hits. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+
+
+```python copy
+_ = transform.summary(csms)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 786.0
+    Number of target-decoy CSMs: 39.0
+    Number of decoy-decoy CSMs: 1.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+```
+</Callout>
+
+One special aspect about this function is that it does not modify the underlying data: the original CSMs are still the same with their original decoy labels!
+
+> [!IMPORTANT]
+>
+> **Please note that the function `transform.reannotate_decoy_labels()` will always return a copy of the original data, no matter which arguments or `by_*` parameter is passed!**
+
+
+```python copy
+_ = transform.summary(csms_none)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 0.0
+    Number of target-decoy CSMs: 0.0
+    Number of decoy-decoy CSMs: 0.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+```
+</Callout>
+
+The reannotated `csms_none` is a complete new list of objects that does not share memory with the original CSMs!
+
+### [Re-]Annotating Crosslinks
+
+
+```python copy
+xls_none = transform.reannotate_decoy_labels(xls, by_mapping={True: None, False: None})
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by mapping: {True: None, False: None}!
+    Annotating crosslinks...: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:00<?, ?it/s]
+```
+</Callout>
+
+
+```python copy
+_ = transform.summary(xls)
+```
+<Callout emoji="✓">
+```
+    Number of crosslinks: 300.0
+    Number of unique crosslinks by peptide: 300.0
+    Number of unique crosslinks by protein: 298.0
+    Number of intra crosslinks: 279.0
+    Number of inter crosslinks: 21.0
+    Number of target-target crosslinks: 265.0
+    Number of target-decoy crosslinks: 0.0
+    Number of decoy-decoy crosslinks: 35.0
+    Minimum crosslink score: 1.1132827525593785
+    Maximum crosslink score: 452.9861536355926
+```
+</Callout>
+
+
+```python copy
+_ = transform.summary(xls_none)
+```
+<Callout emoji="✓">
+```
+    Number of crosslinks: 300.0
+    Number of unique crosslinks by peptide: 300.0
+    Number of unique crosslinks by protein: 298.0
+    Number of intra crosslinks: 279.0
+    Number of inter crosslinks: 21.0
+    Number of target-target crosslinks: 0.0
+    Number of target-decoy crosslinks: 0.0
+    Number of decoy-decoy crosslinks: 0.0
+    Minimum crosslink score: 1.1132827525593785
+    Maximum crosslink score: 452.9861536355926
+```
+</Callout>
+
+Reannotating crosslinks works and behaves exactly the same way!
+
+### [Re-]Annotating a `parser_result`
+
+
+```python copy
+parser_result_none = transform.reannotate_decoy_labels(
+    parser_result, by_mapping={True: None, False: None}
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by mapping: {True: None, False: None}!
+    Annotating crosslink-spectrum-matches...: 100%|████████████████████████████████████████████████████████████████| 826/826 [00:00<00:00, 823703.07it/s]
+    Reannotating decoy labels by mapping: {True: None, False: None}!
+    Annotating crosslinks...: 100%|████████████████████████████████████████████████████████████████████████████████| 300/300 [00:00<00:00, 199697.06it/s]
+```
+</Callout>
+
+```python copy
+_ = transform.summary(parser_result)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 786.0
+    Number of target-decoy CSMs: 39.0
+    Number of decoy-decoy CSMs: 1.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+    Number of crosslinks: 300.0
+    Number of unique crosslinks by peptide: 300.0
+    Number of unique crosslinks by protein: 298.0
+    Number of intra crosslinks: 279.0
+    Number of inter crosslinks: 21.0
+    Number of target-target crosslinks: 265.0
+    Number of target-decoy crosslinks: 0.0
+    Number of decoy-decoy crosslinks: 35.0
+    Minimum crosslink score: 1.1132827525593785
+    Maximum crosslink score: 452.9861536355926
+```
+</Callout>
+
+
+```python copy
+_ = transform.summary(parser_result_none)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 0.0
+    Number of target-decoy CSMs: 0.0
+    Number of decoy-decoy CSMs: 0.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+    Number of crosslinks: 300.0
+    Number of unique crosslinks by peptide: 300.0
+    Number of unique crosslinks by protein: 298.0
+    Number of intra crosslinks: 279.0
+    Number of inter crosslinks: 21.0
+    Number of target-target crosslinks: 0.0
+    Number of target-decoy crosslinks: 0.0
+    Number of decoy-decoy crosslinks: 0.0
+    Minimum crosslink score: 1.1132827525593785
+    Maximum crosslink score: 452.9861536355926
+```
+</Callout>
+
+Reannotating a `parser_result` also works and behaves the same way and will reannotate both CSMs and crosslinks (if available)!
+
+*****
+
+## Decoy [Re-]Annotation `by_decoy_protein_prefix`
+
+
+```python copy
+crosslinks = [
+    data.create_crosslink_min(
+        "PEKP",
+        3,
+        "TIDKE",
+        4,
+        proteins_a=["PROTEIN"],
+        proteins_b=["REV__PROTEIN"],
+        decoy_a=None,
+        decoy_b=None,
+    ),
+]
+transform.display(crosslinks[0])
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     ['PROTEIN']
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        None
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      ['REV__PROTEIN']
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         None
+    Crosslink Type:                     inter
+    Crosslink Score:                    None
+```
+</Callout>
+
+Let's consider a list of `crosslinks` containing the above example crosslink where the beta protein is a decoy match, characterized by the `REV__` prefix string. However, the decoy labels for alpha and beta are both missing (`None`).
+
+
+```python copy
+crosslinks_reannotated = transform.reannotate_decoy_labels(
+    crosslinks, by_decoy_protein_prefix="REV__"
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by decoy protein prefix: REV__!
+    Annotating crosslinks...: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<?, ?it/s]
+```
+</Callout>
+
+By calling `transform.reannotate_decoy_labels(crosslinks, by_decoy_protein_prefix="REV__")` we can signal the function that any protein starting with a `"REV__"` string should be considered a decoy match. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+
+
+```python copy
+transform.display(crosslinks_reannotated[0])
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     ['PROTEIN']
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        False
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      ['REV__PROTEIN']
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         True
+    Crosslink Type:                     inter
+    Crosslink Score:                    None
+```
+</Callout>
+
+After reannotation alpha and beta are correctly labelled as target and decoy respectively.
+
+
+```python copy
+crosslinks = [
+    data.create_crosslink_min(
+        "PEKP",
+        3,
+        "TIDKE",
+        4,
+        proteins_a=["PROTEIN"],
+        proteins_b=["REV__PROTEIN", "PROTEIN"],
+        decoy_a=None,
+        decoy_b=None,
+    ),
+]
+transform.display(crosslinks[0])
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     ['PROTEIN']
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        None
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      ['REV__PROTEIN', 'PROTEIN']
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         None
+    Crosslink Type:                     intra
+    Crosslink Score:                    None
+```
+</Callout>
+
+Let's consider a second case, this time the beta peptide maps to both a decoy and a target protein!
+
+
+```python copy
+crosslinks_reannotated = transform.reannotate_decoy_labels(
+    crosslinks, by_decoy_protein_prefix="REV__"
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by decoy protein prefix: REV__!
+    Annotating crosslinks...: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<?, ?it/s]
+```
+</Callout>
+
+
+```python copy
+transform.display(crosslinks_reannotated[0])
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     ['PROTEIN']
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        False
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      ['REV__PROTEIN', 'PROTEIN']
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         False
+    Crosslink Type:                     intra
+    Crosslink Score:                    None
+```
+</Callout>
+
+> [!IMPORTANT]
+>
+> **After reannotation beta is labelled as target hit this time because one of the proteins was a target match. It would only be labelled as a decoy if all of its associated proteins are decoy matches!**
+
+*****
+
+## Decoy [Re-]Annotation `by_decoy_protein_substring`
+
+
+```python copy
+crosslinks = [
+    data.create_crosslink_min(
+        "PEKP",
+        3,
+        "TIDKE",
+        4,
+        proteins_a=["PROTEIN"],
+        proteins_b=["GENE | REV__PROTEIN"],
+        decoy_a=None,
+        decoy_b=None,
+    ),
+]
+transform.display(crosslinks[0])
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     ['PROTEIN']
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        None
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      ['GENE | REV__PROTEIN']
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         None
+    Crosslink Type:                     inter
+    Crosslink Score:                    None
+```
+</Callout>
+
+Let's consider a list of `crosslinks` containing the above example crosslink where the beta protein is a decoy match, characterized by the `REV__` substring which is also prefixed by a `"GENE | "` symbol. However, the decoy labels for alpha and beta are both missing (`None`). Because of the gene prefix reannotation `by_decoy_protein_prefix` would not work.
+
+
+```python copy
+crosslinks_reannotated = transform.reannotate_decoy_labels(
+    crosslinks, by_decoy_protein_substring="REV__"
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by decoy protein substring: REV__!
+    Annotating crosslinks...: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<?, ?it/s]
+```
+</Callout>
+
+By calling `transform.reannotate_decoy_labels(crosslinks, by_decoy_protein_substring="REV__")` we can signal the function that any protein containing a `"REV__"` string anywhere should be considered a decoy match. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+
+
+```python copy
+transform.display(crosslinks_reannotated[0])
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     ['PROTEIN']
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        False
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      ['GENE | REV__PROTEIN']
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         True
+    Crosslink Type:                     inter
+    Crosslink Score:                    None
+```
+</Callout>
+
+After reannotation alpha and beta are correctly labelled as target and decoy respectively.
+
+*****
+
+## Decoy [Re-]Annotation `by_target_fasta`
+
+
+```python copy
+_ = transform.summary(csms_none)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 0.0
+    Number of target-decoy CSMs: 0.0
+    Number of decoy-decoy CSMs: 0.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+```
+</Callout>
+
+Remember the dummy data we generated at the start? This data has no decoy labels and also no protein prefixes or substrings that would allow decoy label inference.
+
+
+```python copy
+csms_reannotated = transform.reannotate_decoy_labels(
+    csms_none, by_target_fasta="../../data/_fasta/Cas9_plus10.fasta"
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by provided target fasta file!
+    Annotating crosslink-spectrum-matches...: 100%|████████████████████████████████████████████████████████████████| 826/826 [00:00<00:00, 433495.38it/s]
+```
+</Callout>
+
+By calling `transform.reannotate_decoy_labels(csms_none, by_target_fasta="../../data/_fasta/Cas9_plus10.fasta")` we can signal the function that any peptide/protein **NOT IN** the FASTA file `"../../data/_fasta/Cas9_plus10.fasta"` should be considered a decoy match. In the background this checks if the FASTA file contains the peptide sequence and does not use protein names. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+
+
+```python copy
+_ = transform.summary(csms_reannotated)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 786.0
+    Number of target-decoy CSMs: 39.0
+    Number of decoy-decoy CSMs: 1.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+```
+</Callout>
+
+
+```python copy
+_ = transform.summary(csms)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 786.0
+    Number of target-decoy CSMs: 39.0
+    Number of decoy-decoy CSMs: 1.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+```
+</Callout>
+
+As you can see this reproduces exactly our original CSMs!
+
+*****
+
+## Decoy [Re-]Annotation `by_decoy_fasta`
+
+
+```python copy
+_ = transform.summary(csms_none)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 0.0
+    Number of target-decoy CSMs: 0.0
+    Number of decoy-decoy CSMs: 0.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+```
+</Callout>
+
+
+```python copy
+csms_reannotated = transform.reannotate_decoy_labels(
+    csms_none, by_decoy_fasta="../../data/_fasta/Cas9_plus10.fasta"
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by provided decoy fasta file!
+    Annotating crosslink-spectrum-matches...: 100%|████████████████████████████████████████████████████████████████| 826/826 [00:00<00:00, 823898.95it/s]
+```
+</Callout>
+
+We can do the inverse operation by calling `transform.reannotate_decoy_labels(csms_none, by_decoy_fasta="../../data/_fasta/Cas9_plus10.fasta")` where we signal the function that any peptide/protein **IN** the FASTA file `"../../data/_fasta/Cas9_plus10.fasta"` should be considered a decoy match. In the background this checks if the FASTA file contains the peptide sequence and does not use protein names. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+
+
+```python copy
+_ = transform.summary(csms_reannotated)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 1.0
+    Number of target-decoy CSMs: 39.0
+    Number of decoy-decoy CSMs: 786.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+```
+</Callout>
+
+
+```python copy
+_ = transform.summary(csms)
+```
+<Callout emoji="✓">
+```
+    Number of CSMs: 826.0
+    Number of unique CSMs: 826.0
+    Number of intra CSMs: 803.0
+    Number of inter CSMs: 23.0
+    Number of target-target CSMs: 786.0
+    Number of target-decoy CSMs: 39.0
+    Number of decoy-decoy CSMs: 1.0
+    Minimum CSM score: 1.1132827525593785
+    Maximum CSM score: 452.9861536355926
+```
+</Callout>
+
+This of course also produces the inverse results of our original data!
+
+*****
+
+## Decoy [Re-]Annotation `by_function`
+
+
+```python copy
+crosslinks = [
+    data.create_crosslink_min(
+        "PEKP",
+        3,
+        "TIDKE",
+        4,
+        decoy_a=None,
+        decoy_b=None,
+        additional_information={"Decoy Class": "TD"},
+    ),
+]
+transform.display(crosslinks[0], show_additional_information=True)
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     None
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        None
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      None
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         None
+    Crosslink Type:                     inter
+    Crosslink Score:                    None
+    Additional Information:             {'Decoy Class': 'TD'}
+```
+</Callout>
+
+Let's consider a list of `crosslinks` containing the above example crosslink where the beta protein is a decoy match, characterized by data that is only available in the `additional_information`, e.g. it is a `TD` crosslink meaning the first peptide is a target match and the second peptide is a decoy match. However, the decoy labels for alpha and beta are both missing (`None`).
+
+
+```python copy
+from typing import Dict, Any, Tuple
+
+
+def parse_alpha_beta_target_decoy(crosslink: Dict[str, Any]) -> Tuple[bool, bool]:
+    is_decoy_alpha: bool = crosslink["additional_information"]["Decoy Class"][0] == "D"
+    is_decoy_beta: bool = crosslink["additional_information"]["Decoy Class"][1] == "D"
+    return is_decoy_alpha, is_decoy_beta
+
+
+crosslinks_reannotated = transform.reannotate_decoy_labels(
+    crosslinks, by_function=parse_alpha_beta_target_decoy
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by provided function!
+    Annotating crosslinks...: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<?, ?it/s]
+```
+</Callout>
+
+We can write our own function to parse decoy labels such as `parse_alpha_beta_target_decoy()`. The function needs to take a CSM or crosslink as input and should return two boolean values: the first one should be the decoy label for the alpha peptide, and the second one should be the decoy label for the beta peptide. We can then do reannotation by calling `transform.reannotate_decoy_labels(crosslinks, by_function=parse_alpha_beta_target_decoy)` where we pass our custom function as an argument. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+
+
+```python copy
+transform.display(crosslinks_reannotated[0], show_additional_information=True)
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     None
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        False
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      None
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         True
+    Crosslink Type:                     inter
+    Crosslink Score:                    None
+    Additional Information:             {'Decoy Class': 'TD'}
+```
+</Callout>
+
+This correctly labels our crosslink with alpha as target and beta as decoy!
+
+> [!WARNING]
+>
+> **Please note that labelling based on values in `additional_information` must be done with extreme caution as alpha and beta might be switched during parsing because pyXLMS uses its own ordering rules!**
+
+This is demonstrated by the example below:
+
+
+```python copy
+crosslinks = [
+    data.create_crosslink_min(
+        "TIDKE",
+        4,
+        "PEKP",
+        3,
+        decoy_a=None,
+        decoy_b=None,
+        additional_information={"Decoy Class": "TD"},
+    ),
+]
+```
+
+Let's consider a list of `crosslinks` containing the above example crosslink where the `PEKP` peptide is a decoy match, characterized by data that is only available in the `additional_information`, e.g. it is a `TD` crosslink meaning the first peptide is a target match and the second peptide is a decoy match. However, the decoy labels for alpha and beta are both missing (`None`).
+
+
+```python copy
+transform.display(crosslinks[0], show_additional_information=True)
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     None
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        None
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      None
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         None
+    Crosslink Type:                     inter
+    Crosslink Score:                    None
+    Additional Information:             {'Decoy Class': 'TD'}
+```
+</Callout>
+
+As you can see the peptides got swapped upon creation of the crosslink because pyXLMS internally orders them alphabetically for consistency and to avoid duplicates (e.g. the `TIDKE4-PEKP3` crosslink is the same as the `PEKP3-TIDKE4` crosslink).
+
+
+```python copy
+crosslinks_reannotated = transform.reannotate_decoy_labels(
+    crosslinks, by_function=parse_alpha_beta_target_decoy
+)
+```
+<Callout emoji="✓">
+```
+    Reannotating decoy labels by provided function!
+    Annotating crosslinks...: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<?, ?it/s]
+```
+</Callout>
+
+
+```python copy
+transform.display(crosslinks_reannotated[0], show_additional_information=True)
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       partial
+    Alpha Peptide:                      PEKP
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     None
+    Alpha Proteins Crosslink Positions: None
+    Alpha Decoy:                        False
+    Beta Peptide:                       TIDKE
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      None
+    Beta Proteins Crosslink Positions:  None
+    Beta Decoy:                         True
+    Crosslink Type:                     inter
+    Crosslink Score:                    None
+    Additional Information:             {'Decoy Class': 'TD'}
+```
+</Callout>
+
+Reannotation by the same custom `parse_alpha_beta_target_decoy()` function would now assign false decoy labels because alpha and beta were swapped!
