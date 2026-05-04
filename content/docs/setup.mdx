@@ -63,3 +63,13 @@ _ = pyXLMS.transform.summary(pr)
 ```python copy
 _ = pyXLMS.exporter.to_xifdr(pr["crosslink-spectrum-matches"], filename="msannika_CSMs_for_xiFDR.csv")
 ```
+
+## pyXLMS Template
+
+![pyXLMS template](/template.png)
+
+We offer a repository template for python projects using pyXLMS. The repository is available via
+[github.com/hgb-bin-proteomics/pyXLMS-template](https://github.com/hgb-bin-proteomics/pyXLMS-template)
+and uses [uv](https://docs.astral.sh/uv/) for project and dependency management **(highly recommended)**.
+If used on GitHub it also directly integrates with GitHub Actions for automated linting, formatting, and
+testing.
