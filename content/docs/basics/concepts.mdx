@@ -1,0 +1,176 @@
+import { Callout } from 'nextra/components'
+
+# Important Concepts
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+Please read through the following design concepts before starting to use pyXLMS to
+better understand the package and to avoid confusion.
+
+</div>
+
+> [!TIP]
+>
+> **We also highly recommend reading through the [Limitations](/docs/limitations) and the [FAQ](/docs/faq) once!**
+
+## Everything is a dictionary
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+All pyXLMS data structures (crosslink-spectrum-matches, crosslinks, parser results) are just regular
+python dictionaries in the background. They can easily be modified, adapted, and extended for special
+purposes. We recommend to add additional information to the `"additional_information"` attribute instead
+of adding it directly to crosslink-spectrum-matches and crosslinks!
+
+</div>
+
+## Functions are designed to fail fast
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+Functions are designed to excessively check inputs and fail early if either a wrong data type is provided for
+any of the parameters or if the input crosslink-spectrum-matches, crosslinks, or parser results do not contain
+sufficient information to successfully run the function. For example, grouping by residue pairs requires that
+all crosslink-spectrum-matches have associated proteins and protein crosslink positions. The function will
+check this preemptively and throw an exception before performing the grouping if any of the information is
+missing!
+
+</div>
+
+## Crosslink types
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+The `"crosslink_type"` is determined upon crosslink-spectrum-match and crosslink creation via `"alpha_proteins"` and `"beta_proteins"`. pyXLMS will
+create the intersection of `"alpha_proteins"` and `"beta_proteins"` and if the intersection is an empty set it will assign crosslink type `"inter"`
+and else crosslink type `"intra"`. pyXLMS classifies homomeric interlinks as intra-links. If no proteins are given the crosslink type will always
+be inter. For decoy proteins the decoy prefix (if any) should be stripped from the protein name in order to correctly classify the crosslink type.
+This is done by the parsers already but decoy prefixes might need adoption depending on the search engine and any custom naming rules. Please refer
+to the parser documentation for that!
+
+</div>
+
+## Advanced topics
+
+> [!TIP]
+>
+> **The below topics are only important if you plan to write custom code/your own functions based on pyXLMS**
+> **and are not required if you simply only use the built-in pyXLMS functions!**
+
+## Peptide order
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+Upon creation of crosslink-spectrum-matches and crosslinks pyXLMS will re-order alpha and beta based on the peptide sequences and peptide
+crosslink positions. The peptide sequence and peptide crosslink position are fused for each peptide and the alpha (peptide) will always be
+the one where that fusion is alphabetically first, e.g. even if `peptide_a="TIDE"` and `peptide_b="PEP"` is specified, the resulting
+crosslink-spectrum-match or crosslink will have `"alpha_peptide"="PEP"` and `"beta_peptide"="TIDE"`. This ensures consistency and allows
+easy filtering of redundant/non-unique crosslinks.
+
+</div>
+
+> [!IMPORTANT]
+>
+> **Ordering has to be carefully considered when retrieving data via `"additional_information"`: data associated with the alpha peptide in**
+> **the additional information might map to the beta peptide instead due to the re-ordering! This needs to be manually checked via the peptide**
+> **sequences!**
+
+## Modifying data
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+Caution must be taken when manually modifying data post parsing - some attributes (e.g. `"crosslink_type"`) of
+crosslink-spectrum-matches, crosslinks, and parser results are calculated upon creation and will not be recalculated
+when their data is modified. Generally we recommend using `copy.deepcopy()` whenever modifying data in order to keep
+the original data:
+
+</div>
+
+```python copy
+import copy
+
+new_data = copy.deepcopy(data)
+```
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+We also recommend creating new crosslink-spectrum-matches and crosslinks - especially when data like `"alpha_proteins"` or `"beta_proteins"`
+is affected - based on the original crosslink-spectrum-matches and crosslinks instead of copying. This will correctly recalculate other attributes.
+
+</div>
+
+> [!IMPORTANT]
+>
+> **This only has to be considered for custom functions/code - if you are just using pyXLMS functions this does not apply!**
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+Here is a minimal example that illustrates why caution needs to be taken:
+
+</div>
+
+```python copy
+from pyXLMS.data import create_crosslink_min
+
+crosslink = create_crosslink_min(
+    peptide_a="PEKP",
+    xl_position_peptide_a=3,
+    proteins_a=["PROTEIN"],
+    peptide_b="TIDEK",
+    xl_position_peptide_b=5,
+    proteins_b=["PROTEIN"],
+)
+
+# correctly set as intra crosslink
+crosslink["crosslink_type"]
+```
+<Callout emoji="✓">
+```
+'intra'
+```
+</Callout>
+```python copy
+crosslink["alpha_proteins"] = ["ANOTHER PROTEIN"]
+
+# incorrectly still set as intra crosslink
+crosslink["crosslink_type"]
+```
+<Callout emoji="✓">
+```
+'intra'
+```
+</Callout>
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+This can be avoided by:
+
+</div>
+
+```python copy
+new_crosslink = create_crosslink_min(
+    peptide_a=crosslink["alpha_peptide"],
+    xl_position_peptide_a=crosslink["alpha_peptide_crosslink_position"],
+    proteins_a=["ANOTHER PROTEIN"],
+    peptide_b=crosslink["alpha_peptide"],
+    xl_position_peptide_b=crosslink["beta_peptide_crosslink_position"],
+    proteins_b=crosslink["beta_proteins"],
+)
+
+# correctly set as inter crosslink
+new_crosslink["crosslink_type"]
+```
+<Callout emoji="✓">
+```
+'inter'
+```
+</Callout>
