@@ -1,0 +1,34 @@
+# Feature Support
+
+<br/>
+<div style={{ textAlign: 'justify' }}>
+
+The webapp supports almost all functionality of the pyXLMS python package. However,
+the following features are **exclusively available via the python package**:
+
+- Some parser parameters are only available in the python package.
+- Processing of search results from more than one search engine and crosslinker at the same time.
+- Creating intersections of search results from more than one search engine or crosslinker. You
+can read more about how to do that with the python package [here](/docs/transform/intersection).
+We also used that for the pyXLMS manuscript to create intersections of different replicates and search engines,
+you can find the code for that [here](https://github.com/hgb-bin-proteomics/pyXLMS-manuscript/blob/master/figure_code.ipynb).
+- Creating Venn diagrams. You can read more about how to do that with the python package [here](/docs/plotting/plot_venn_diagram).
+We also used that for the pyXLMS manuscript, you can find the code for that
+[here](https://github.com/hgb-bin-proteomics/pyXLMS-manuscript/blob/master/figure_code.ipynb).
+- Annotating estimated false-discovery-rate (FDR), more about that [here](/docs/transform/annotate_fdr).
+- \[Re-\]Annotating decoy labels is only available in the python package, see more [here](/docs/transform/reannotate_decoys).
+- Some filters are only available in the python package, e.g. filtering by peptide or residue pair. You can read more
+[here](/docs/transform/filter).
+- Export to [ProForma](https://www.psidev.info/proforma) is only available in the python package as described
+[here](/docs/transform/summary_and_util#crosslink-spectrum-matches-and-crosslinks-in-proforma-notation).
+
+</div>
+
+> [!TIP]
+>
+> **The file size limit is 200 MB in the web app. For self-hosted instances this can be increased via the config using**
+> **the `maxUploadSize` option. For more info see [here](https://docs.streamlit.io/develop/api-reference/configuration/config.toml#server).**
+>
+> **However, we generally recommend to run anything with more than 50 000 crosslink-spectrum-matches/crosslinks via the python**
+> **package. The python package shows progress bars for every operation and is therefore favorable for longer operations like**
+> **validation or re-annotation.**

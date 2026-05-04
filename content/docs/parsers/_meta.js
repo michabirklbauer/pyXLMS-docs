@@ -8,5 +8,7 @@ export default {
   'plink': 'Reading pLink Result Files',
   'scout': 'Reading Scout Result Files',
   'xi': 'Reading xiSearch/xiFDR Result Files',
-  'xlinkx': 'Reading XlinkX Result Files'
+  'xinet': 'Reading xiNET/xiVIEW Exported Result Files',
+  'xlinkx': 'Reading XlinkX Result Files',
+  'compressed': 'Reading Compressed Result Files'
 }

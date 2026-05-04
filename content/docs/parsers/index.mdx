@@ -1,7 +1,7 @@
 # Introduction
 
 pyXLMS supports the following crosslink search engines and input file formats for
-reading crosslink results at both crosslink-spectrum-match and crosslink/residue pair
+reading crosslink results at both crosslink-spectrum-match and crosslink/peptide pair/residue pair
 level.
 
 ## Available Parsers with Documented Tutorial Pages
@@ -14,13 +14,15 @@ level.
 - [Reading pLink Result Files](/docs/parsers/plink)
 - [Reading Scout Result Files](/docs/parsers/scout)
 - [Reading xiSearch/xiFDR Result Files](/docs/parsers/xi)
+- [Reading xiNET/xiVIEW Exported Result Files](/docs/parsers/xinet)
 - [Reading XlinkX Result Files](/docs/parsers/xlinkx)
+- [Reading Compressed Result Files](/docs/parsers/compressed)
 
 ## Overview of Supported Search Engines and Formats
 
 The following abbreviations are used:
 - **CSMs:** crosslink-spectrum-matches
-- **XLs:** crosslinks/residue pairs
+- **XLs:** crosslinks/peptide pairs/residue pairs
 
 The following crosslink search engines and formats are currently supported:
 
@@ -32,6 +34,7 @@ The following crosslink search engines and formats are currently supported:
 | pLink 2 & 3          | `read_plink()`    | ✅  | ✅  | `.csv`                       | [link](/docs/parsers/plink)    | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_plink.read_plink) |
 | Scout                | `read_scout()`    | ✅  | ✅  | `.csv`                       | [link](/docs/parsers/scout)    | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_scout.read_scout) |
 | xiSearch & xiFDR     | `read_xi()`       | ✅  | ✅  | `.csv`                       | [link](/docs/parsers/xi)       | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xi.read_xi) |
+| xiNET & xiVIEW       | `read_xinet()`    | ✅  | ✅  | `.csv`                       | [link](/docs/parsers/xinet)    | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xinet_xiview.read_xinet) |
 | XlinkX               | `read_xlinkx()`   | ✅  | ✅  | `.pdResult`, `.xlsx`, `.txt` | [link](/docs/parsers/xlinkx)   | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xlinkx.read_xlinkx) |
 | mzIdentML            | `read_mzid()`     | ✅  | ❌  | `.mzid`                      | [link](/docs/parsers/mzid)     | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_mzid.read_mzid) |
 | pyXLMS/custom        | `read_custom()`   | ✅  | ✅  | `.xlsx`, `.parquet`, `.csv`  | [link](/docs/parsers/custom)   | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_custom.read_custom) |
@@ -66,6 +69,8 @@ Here's a quick summary of the available functions, their page links and their AP
 | `parser.parse_modifications_from_xi_sequence()`       |                                              | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xi.parse_modifications_from_xi_sequence) |
 | `parser.parse_peptide()`                              |                                              | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xi.parse_peptide) |
 | `parser.read_xi()`                                    | [link](/docs/parsers/xi)                     | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xi.read_xi) |
+| `parser.read_xinet()`                                 | [link](/docs/parsers/xinet)                  | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xinet_xiview.read_xinet) |
+| `parser.read_xiview()`                                | [link](/docs/parsers/xinet)                  | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xinet_xiview.read_xiview) |
 | `parser.read_xlinkx()`                                | [link](/docs/parsers/xlinkx)                 | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xlinkx.read_xlinkx) |
 | `parser.format_sequence()`                            |                                              | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.util.format_sequence) |
 | `parser.get_bool_from_value()`                        |                                              | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.util.get_bool_from_value) |

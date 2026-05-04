@@ -10,7 +10,7 @@ print(f"Installed pyXLMS version: {__version__}")
 ```
 <Callout emoji="✓">
 ```
-    Installed pyXLMS version: 1.5.1
+    Installed pyXLMS version: 1.8.7
 ```
 </Callout>
 
@@ -22,10 +22,6 @@ from pyXLMS import transform
 
 All functionality to parse crosslink-spectrum-matches (CSMs) from [mzIdentML](https://www.psidev.info/mzidentml) result files is available via the `parser` submodule. We also import the `transform` submodule to show some summary statistics of the read files.
 
-> [!WARNING]
->
-> **Please note that reading mzIdentML files is an experimental feature! Errors might still occur!**
-
 ## Reading mzIdentML Result Files via `parser.read()`
 
 
@@ -36,12 +32,9 @@ parser_result = parser.read(
     crosslinker="DSS",
 )
 ```
-<Callout type="warning">
+<Callout emoji="✓">
 ```
-    C:\Users\micha.birklbauer\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyXLMS\parser\parser_xldbse_mzid.py:142: UserWarning: Please be aware that mzIdentML parsing is currently an experimental feature!
-    Please check the documentation for parser.read_mzid for more information!
-      warnings.warn(
-    100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1353/1353 [00:00<00:00, 104076.83it/s]
+    Reading mzIdentML identifications...: 100%|███████████████████████████████████████████████████████████████████| 1353/1353 [00:00<00:00, 20700.26it/s]
 ```
 </Callout>
 
@@ -74,8 +67,8 @@ _ = transform.summary(parser_result)
 ```
     Number of CSMs: 786.0
     Number of unique CSMs: 786.0
-    Number of intra CSMs: 0.0
-    Number of inter CSMs: 786.0
+    Number of intra CSMs: 774.0
+    Number of inter CSMs: 12.0
     Number of target-target CSMs: 0.0
     Number of target-decoy CSMs: 0.0
     Number of decoy-decoy CSMs: 0.0
@@ -99,20 +92,20 @@ for k, v in sample_csm.items():
     alpha_peptide: GQKNSR
     alpha_modifications: None
     alpha_peptide_crosslink_position: 3
-    alpha_proteins: None
-    alpha_proteins_crosslink_positions: None
-    alpha_proteins_peptide_positions: None
+    alpha_proteins: ['Cas9']
+    alpha_proteins_crosslink_positions: [779]
+    alpha_proteins_peptide_positions: [777]
     alpha_score: None
     alpha_decoy: None
     beta_peptide: GQKNSR
     beta_modifications: None
     beta_peptide_crosslink_position: 3
-    beta_proteins: None
-    beta_proteins_crosslink_positions: None
-    beta_proteins_peptide_positions: None
+    beta_proteins: ['Cas9']
+    beta_proteins_crosslink_positions: [779]
+    beta_proteins_peptide_positions: [777]
     beta_score: None
     beta_decoy: None
-    crosslink_type: inter
+    crosslink_type: intra
     score: None
     spectrum_file: C:\Users\P42587\Documents\GitHub\pdresult_reader\study_folder\XLpeplib_Beveridge_QEx-HFX_DSS_R1.mzML
     scan_nr: 1
@@ -150,12 +143,9 @@ parser_result = parser.read_mzid(
     "../../data/ms_annika/XLpeplib_Beveridge_QEx-HFX_DSS_R1.mzid"
 )
 ```
-<Callout type="warning">
+<Callout emoji="✓">
 ```
-    C:\Users\micha.birklbauer\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyXLMS\parser\parser_xldbse_mzid.py:142: UserWarning: Please be aware that mzIdentML parsing is currently an experimental feature!
-    Please check the documentation for parser.read_mzid for more information!
-      warnings.warn(
-    100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1353/1353 [00:00<00:00, 87245.65it/s]
+    Reading mzIdentML identifications...: 100%|██████████████████████████████████████████████████████████████████| 1353/1353 [00:00<00:00, 111528.28it/s]
 ```
 </Callout>
 
@@ -169,8 +159,8 @@ _ = transform.summary(parser_result)
 ```
     Number of CSMs: 786.0
     Number of unique CSMs: 786.0
-    Number of intra CSMs: 0.0
-    Number of inter CSMs: 786.0
+    Number of intra CSMs: 774.0
+    Number of inter CSMs: 12.0
     Number of target-target CSMs: 0.0
     Number of target-decoy CSMs: 0.0
     Number of decoy-decoy CSMs: 0.0
