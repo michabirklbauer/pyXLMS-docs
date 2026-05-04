@@ -5,6 +5,7 @@ export default {
   'plot_residue_pair_distribution': 'Plotting Residue Pair Distribution',
   'plot_protein_distribution': 'Plotting Protein Distribution',
   'plot_score_distribution': 'Plotting Score Distribution',
+  'plot_string_score_distribution': 'Plotting STRING Score Distribution',
   'plot_target_decoy_distribution': 'Plotting Target and Decoy Distribution',
   'plot_venn_diagram': 'Plotting Venn Diagrams'
 }
