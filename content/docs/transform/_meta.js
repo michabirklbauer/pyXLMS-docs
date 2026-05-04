@@ -7,5 +7,6 @@ export default {
   'filter': 'Filtering Crosslink-Spectrum-Matches and Crosslinks',
   'reannotate_decoys': 'Annotating Decoy Labels',
   'reannotate_positions': 'Annotating Crosslinked Protein Positions',
+  'annotate_string': 'Annotating STRING Score and Interactions',
   'intersection': 'Intersections of Crosslinks and Crosslink-Spectrum-Matches'
 }
