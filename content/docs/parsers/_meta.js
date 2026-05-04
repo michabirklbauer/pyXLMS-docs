@@ -9,5 +9,6 @@ export default {
   'scout': 'Reading Scout Result Files',
   'xi': 'Reading xiSearch/xiFDR Result Files',
   'xinet': 'Reading xiNET/xiVIEW Exported Result Files',
-  'xlinkx': 'Reading XlinkX Result Files'
+  'xlinkx': 'Reading XlinkX Result Files',
+  'compressed': 'Reading Compressed Result Files'
 }

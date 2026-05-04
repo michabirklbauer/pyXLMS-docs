@@ -1,0 +1,131 @@
+import { Callout } from 'nextra/components'
+
+# Reading Compressed Result Files
+
+
+```python copy
+from pyXLMS import __version__
+
+print(f"Installed pyXLMS version: {__version__}")
+```
+<Callout emoji="✓">
+```
+    Installed pyXLMS version: 1.8.7
+```
+</Callout>
+
+
+```python copy
+from pyXLMS import parser
+from pyXLMS import transform
+```
+
+All functionality to parse results is available via the `parser` submodule. We also import the `transform` submodule to show some summary statistics of the read files.
+
+## Using `**kwargs` and Reading Compressed Files via `parser.read()`
+
+
+```python copy
+parser_result = parser.read(
+    "../../data/_test/annotate_string_scores/Nucleus_Rep1_Crosslinks.txt.xz",
+    engine="MS Annika",
+    crosslinker="DSBSO",
+    format="txt",
+    unsafe=True,
+    verbose=0,
+    compression="xz",
+)
+```
+<Callout emoji="✓">
+```
+    Reading MS Annika crosslinks...: 100%|██████████████████████████████████████████████████████████████████████| 81066/81066 [00:04<00:00, 16415.63it/s]
+```
+</Callout>
+
+We can read any file using the `parser.read()` method and specifying the used search engine and crosslinker. We can also pass additional parameters (`**kwargs`) that are used by the search engine specific parsers or by `pandas.read*`, e.g. in this case we pass two additional parameters to `parser.read_msannika()` namely `format`, and `unsafe`. We also pass one parameter to `pandas.read_csv()` namely `compression` to signal that our result file is `xz` compressed. For more information you can read the documentation of the `parser.read()` method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read).
+
+> [!IMPORTANT]
+>
+> **Please note that you might need to explicitly specify a format when passing parameters to `pandas.read*` as the parser might not be able to infer the format if the file is compressed!**
+
+
+```python copy
+transform.display(parser_result)
+```
+<Callout emoji="✓">
+```
+    Data Type:                            parser_result
+    Completeness:                         partial
+    Identifying Search Engine:            MS Annika
+    Number of Crosslink-Spectrum-Matches: None
+    Number of Crosslinks:                 81066
+```
+</Callout>
+
+The `parser.read()` method returns a dictionary with a set of specified keys and their values. We refer to this dictionary as a `parser_result` object. All `parser.read*` methods return such a `parser_result` object, you can read more about that here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_parser_result), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+
+As you can see from the `parser_result` the compressed result file contained crosslinks. We would be able to access those via `parser_result["crosslinks"]`. We will do this a bit further down.
+
+
+```python copy
+_ = transform.summary(parser_result)
+```
+<Callout emoji="✓">
+```
+    Number of crosslinks: 81066.0
+    Number of unique crosslinks by peptide: 81066.0
+    Number of unique crosslinks by protein: nan
+    Number of intra crosslinks: 7791.0
+    Number of inter crosslinks: 73275.0
+    Number of target-target crosslinks: 32007.0
+    Number of target-decoy crosslinks: 0.0
+    Number of decoy-decoy crosslinks: 49059.0
+    Minimum crosslink score: 1.0
+    Maximum crosslink score: 1159.12
+```
+</Callout>
+
+With the `transform.summary()` method we can also print out some summary statistics about our read crosslinks. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+
+
+```python copy
+sample_xl = parser_result["crosslinks"][0]
+transform.display(sample_xl)
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink
+    Completeness:                       full
+    Alpha Peptide:                      GGAKR
+    Alpha Peptide Crosslink Position:   4
+    Alpha Proteins:                     ['Q9UQ26']
+    Alpha Proteins Crosslink Positions: [238]
+    Alpha Decoy:                        True
+    Beta Peptide:                       KGGGK
+    Beta Peptide Crosslink Position:    1
+    Beta Proteins:                      ['P25490', 'Q8WXX5']
+    Beta Proteins Crosslink Positions:  [237, 10]
+    Beta Decoy:                         True
+    Crosslink Type:                     inter
+    Crosslink Score:                    40.09
+```
+</Callout>
+
+Using `parser_result["crosslinks"][0]` we can get the first crosslink of the file and take a closer look at that.
+
+Here is an example crosslink, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_crosslink), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+
+*****
+
+
+```python copy
+type(parser_result["crosslink-spectrum-matches"])
+```
+<Callout emoji="✓">
+```
+    NoneType
+```
+</Callout>
+
+
+In this example `parser_result["crosslink-spectrum-matches"]` is `None`  because this file did not contain any crosslink-spectrum-matches (CSMs). Therefore in this case, no CSMs can be displayed here.
