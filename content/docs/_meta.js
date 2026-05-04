@@ -8,5 +8,7 @@ export default {
   'plotting': 'Creating Figures',
   'exporters': 'Exporting Data',
   'pipeline': 'Pipelines',
-  'serialization': 'Serialization'
+  'serialization': 'Serialization',
+  'limitations': 'Limitations',
+  'faq': 'FAQ'
 }
