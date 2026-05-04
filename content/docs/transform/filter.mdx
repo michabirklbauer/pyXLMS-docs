@@ -10,7 +10,7 @@ print(f"Installed pyXLMS version: {__version__}")
 ```
 <Callout emoji="✓">
 ```
-    Installed pyXLMS version: 1.4.3
+    Installed pyXLMS version: 1.8.7
 ```
 </Callout>
 
@@ -32,8 +32,8 @@ parser_result = parser.read(
 ```
 <Callout emoji="✓">
 ```
-    Reading MS Annika CSMs...: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 826/826 [00:00<00:00, 14874.06it/s]
-    Reading MS Annika crosslinks...: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:00<00:00, 20000.18it/s]
+    Reading MS Annika CSMs...: 100%|█████████████████████████████████████████████████████████████████████████████████| 826/826 [00:00<00:00, 8436.90it/s]
+    Reading MS Annika crosslinks...: 100%|██████████████████████████████████████████████████████████████████████████| 300/300 [00:00<00:00, 15229.12it/s]
 ```
 </Callout>
 
@@ -114,20 +114,20 @@ list(csms_by_peptide_pair.keys())[:5]
 ```
 <Callout emoji="✓">
 ```
-    ['GQKNSR-GQKNSR',
-     'GQKNSR-GSQKDR',
-     'SDKNR-SDKNR',
-     'DKQSGK-DKQSGK',
-     'DKQSGK-HSIKK']
- ```
- </Callout>
+    ['GQKNSR:3-GQKNSR:3',
+     'GQKNSR:3-DECOY_GSQKDR:4',
+     'SDKNR:3-SDKNR:3',
+     'DKQSGK:2-DKQSGK:2',
+     'DKQSGK:2-HSIKK:4']
+```
+</Callout>
 
 
-Here are the first five peptide pairs that were encountered in our crosslink-spectrum-matches.
+Here are the first five peptide pairs that were encountered in our crosslink-spectrum-matches. The numbers after the colons denote the positions of the crosslink in the peptide sequence. Also note that decoy peptides are prefixed with a `DECOY_` string, you can disable this by calling `transform.filter_peptide_pair_distribution(csms, prefix_decoys=False)`.
 
 
 ```python copy
-len(csms_by_peptide_pair["LSKSR-MKNYWR"])
+len(csms_by_peptide_pair["LSKSR:3-MKNYWR:2"])
 ```
 <Callout emoji="✓">
 ```
@@ -136,47 +136,126 @@ len(csms_by_peptide_pair["LSKSR-MKNYWR"])
 </Callout>
 
 
-For the peptide pair `LSKSR-MKNYWR` we found 9 crosslink-spectrum-matches in our result...
+For the peptide pair `LSKSR:2-MKNYWR:2` we found 9 crosslink-spectrum-matches in our result...
 
 
 ```python copy
 import random
 
-random.choice(csms_by_peptide_pair["LSKSR-MKNYWR"])
+random_csm = random.choice(csms_by_peptide_pair["LSKSR:3-MKNYWR:2"])
+transform.display(random_csm)
 ```
 <Callout emoji="✓">
 ```
-    {'data_type': 'crosslink-spectrum-match',
-     'completeness': 'full',
-     'alpha_peptide': 'LSKSR',
-     'alpha_modifications': {3: ('DSS', 138.06808)},
-     'alpha_peptide_crosslink_position': 3,
-     'alpha_proteins': ['Cas9'],
-     'alpha_proteins_crosslink_positions': [222],
-     'alpha_proteins_peptide_positions': [220],
-     'alpha_score': 116.2226526440155,
-     'alpha_decoy': False,
-     'beta_peptide': 'MKNYWR',
-     'beta_modifications': {2: ('DSS', 138.06808)},
-     'beta_peptide_crosslink_position': 2,
-     'beta_proteins': ['Cas9'],
-     'beta_proteins_crosslink_positions': [884],
-     'beta_proteins_peptide_positions': [883],
-     'beta_score': 97.32530917354812,
-     'beta_decoy': False,
-     'crosslink_type': 'intra',
-     'score': 97.32530917354812,
-     'spectrum_file': 'XLpeplib_Beveridge_QEx-HFX_DSS_R1.raw',
-     'scan_nr': 8961,
-     'charge': 4,
-     'retention_time': 2802.83574,
-     'ion_mobility': 0.0,
-     'additional_information': None}
+    Data Type:                          crosslink-spectrum-match
+    Completeness:                       full
+    Alpha Peptide:                      LSKSR
+    Alpha Modifications:                {3: ('DSS', 138.06808)}
+    Alpha Peptide Crosslink Position:   3
+    Alpha Proteins:                     ['Cas9']
+    Alpha Proteins Crosslink Positions: [222]
+    Alpha Proteins Peptide Positions:   [220]
+    Alpha Peptide Score:                118.07661741329055
+    Alpha Decoy:                        False
+    Beta Peptide:                       MKNYWR
+    Beta Modifications:                 {2: ('DSS', 138.06808)}
+    Beta Peptide Crosslink Position:    2
+    Beta Proteins:                      ['Cas9']
+    Beta Proteins Crosslink Positions:  [884]
+    Beta Proteins Peptide Positions:    [883]
+    Beta Peptide Score:                 109.20912671549812
+    Beta Decoy:                         False
+    Crosslink Type:                     intra
+    CSM Score:                          109.20912671549812
+    Spectrum File:                      XLpeplib_Beveridge_QEx-HFX_DSS_R1.raw
+    Scan Number:                        9072
+    Precursor Charge:                   4
+    Retention Time:                     2832.95832
+    Ion Mobility/FAIMS CV:              0.0
+```
+</Callout>
+
+...and here is a random `LSKSR:3-MKNYWR:2` crosslink-spectrum-match.
+
+## Filtering by Residue Pair
+
+
+```python copy
+csms_by_residue_pair = transform.filter_residue_pair_distribution(csms)
+```
+
+We can filter crosslink-spectrum-matches by their associated residue pairs by calling `transform.filter_residue_pair_distribution()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the residue pairs as keys with their associated values being lists of the corresponding CSMs. You can read more about the `filter_residue_pair_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_residue_pair_distribution).
+
+> [!IMPORTANT]
+>
+> **Please note that this filter requires that `alpha_proteins`, `beta_proteins`, `alpha_proteins_crosslink_positions`, and `beta_proteins_crosslink_positions` fields are set for all crosslink-spectrum-matches.**
+
+
+```python copy
+list(csms_by_residue_pair.keys())[:5]
+```
+<Callout emoji="✓">
+```
+    ['Cas9:779-Cas9:779',
+     'Cas9:779-DECOY_Cas9:696',
+     'Cas9:866-Cas9:866',
+     'Cas9:677-Cas9:677',
+     'Cas9:48-Cas9:677']
 ```
 </Callout>
 
 
-...and here is a random `LSKSR-MKNYWR` crosslink-spectrum-match.
+Here are the first five residue pairs that were encountered in our crosslink-spectrum-matches. The numbers after the colons denote the positions of the crosslink in the protein sequence. Also note that decoy proteins are prefixed with a `DECOY_` string, you can disable this by calling `transform.filter_residue_pair_distribution(csms, prefix_decoys=False)`.
+
+
+```python copy
+len(csms_by_residue_pair["Cas9:1122-Cas9:884"])
+```
+<Callout emoji="✓">
+```
+    22
+```
+</Callout>
+
+
+For the residue pair `Cas9:1122-Cas9:884` we found 22 crosslink-spectrum-matches in our result...
+
+
+```python copy
+random_csm = random.choice(csms_by_residue_pair["Cas9:1122-Cas9:884"])
+transform.display(random_csm)
+```
+<Callout emoji="✓">
+```
+    Data Type:                          crosslink-spectrum-match
+    Completeness:                       full
+    Alpha Peptide:                      MKNYWR
+    Alpha Modifications:                {1: ('Oxidation', 15.994915), 2: ('DSS', 138.06808)}
+    Alpha Peptide Crosslink Position:   2
+    Alpha Proteins:                     ['Cas9']
+    Alpha Proteins Crosslink Positions: [884]
+    Alpha Proteins Peptide Positions:   [883]
+    Alpha Peptide Score:                198.27409728492975
+    Alpha Decoy:                        False
+    Beta Peptide:                       NSDKLIAR
+    Beta Modifications:                 {4: ('DSS', 138.06808)}
+    Beta Peptide Crosslink Position:    4
+    Beta Proteins:                      ['Cas9']
+    Beta Proteins Crosslink Positions:  [1122]
+    Beta Proteins Peptide Positions:    [1119]
+    Beta Peptide Score:                 251.1469294734371
+    Beta Decoy:                         False
+    Crosslink Type:                     intra
+    CSM Score:                          198.27409728492975
+    Spectrum File:                      XLpeplib_Beveridge_QEx-HFX_DSS_R1.raw
+    Scan Number:                        11323
+    Precursor Charge:                   4
+    Retention Time:                     3410.44692
+    Ion Mobility/FAIMS CV:              0.0
+```
+</Callout>
+
+...and here is a random `Cas9:1122-Cas9:884` crosslink-spectrum-match.
 
 ## Filtering by Protein
 
@@ -299,39 +378,38 @@ Via `"Both"` we get all crosslink-spectrum-matches where both peptides are of on
 
 
 ```python copy
-random.choice(csms_cas9["Both"])
+random_csm = random.choice(csms_cas9["Both"])
+transform.display(random_csm)
 ```
 <Callout emoji="✓">
 ```
-    {'data_type': 'crosslink-spectrum-match',
-     'completeness': 'full',
-     'alpha_peptide': 'APLSASMIKR',
-     'alpha_modifications': {9: ('DSS', 138.06808)},
-     'alpha_peptide_crosslink_position': 9,
-     'alpha_proteins': ['Cas9'],
-     'alpha_proteins_crosslink_positions': [327],
-     'alpha_proteins_peptide_positions': [319],
-     'alpha_score': 150.4839485561563,
-     'alpha_decoy': False,
-     'beta_peptide': 'TEVQTGGFSKESILPK',
-     'beta_modifications': {10: ('DSS', 138.06808)},
-     'beta_peptide_crosslink_position': 10,
-     'beta_proteins': ['Cas9'],
-     'beta_proteins_crosslink_positions': [1111],
-     'beta_proteins_peptide_positions': [1102],
-     'beta_score': 304.4428310555497,
-     'beta_decoy': False,
-     'crosslink_type': 'intra',
-     'score': 150.4839485561563,
-     'spectrum_file': 'XLpeplib_Beveridge_QEx-HFX_DSS_R1.raw',
-     'scan_nr': 17156,
-     'charge': 4,
-     'retention_time': 4648.5357,
-     'ion_mobility': 0.0,
-     'additional_information': None}
+    Data Type:                          crosslink-spectrum-match
+    Completeness:                       full
+    Alpha Peptide:                      KDWDPK
+    Alpha Modifications:                {1: ('DSS', 138.06808)}
+    Alpha Peptide Crosslink Position:   1
+    Alpha Proteins:                     ['Cas9']
+    Alpha Proteins Crosslink Positions: [1128]
+    Alpha Proteins Peptide Positions:   [1128]
+    Alpha Peptide Score:                28.719759495027432
+    Alpha Decoy:                        False
+    Beta Peptide:                       MTNFDKNLPNEK
+    Beta Modifications:                 {6: ('DSS', 138.06808)}
+    Beta Peptide Crosslink Position:    6
+    Beta Proteins:                      ['Cas9']
+    Beta Proteins Crosslink Positions:  [504]
+    Beta Proteins Peptide Positions:    [499]
+    Beta Peptide Score:                 64.4694591126988
+    Beta Decoy:                         False
+    Crosslink Type:                     intra
+    CSM Score:                          28.719759495027432
+    Spectrum File:                      XLpeplib_Beveridge_QEx-HFX_DSS_R1.raw
+    Scan Number:                        13306
+    Precursor Charge:                   3
+    Retention Time:                     3827.9838
+    Ion Mobility/FAIMS CV:              0.0
 ```
 </Callout>
-
 
 Here would be a random example crosslink-spectrum-match from `"Both"` and as you can see both peptides are from Cas9.
 
@@ -350,39 +428,38 @@ Via `"One"` we get all crosslink-spectrum-matches where only one of the two cros
 
 
 ```python copy
-random.choice(csms_cas9["One"])
+random_csm = random.choice(csms_cas9["One"])
+transform.display(random_csm)
 ```
 <Callout emoji="✓">
 ```
-    {'data_type': 'crosslink-spectrum-match',
-     'completeness': 'full',
-     'alpha_peptide': 'VPSKKFK',
-     'alpha_modifications': {4: ('DSS', 138.06808)},
-     'alpha_peptide_crosslink_position': 4,
-     'alpha_proteins': ['Cas9'],
-     'alpha_proteins_crosslink_positions': [34],
-     'alpha_proteins_peptide_positions': [31],
-     'alpha_score': 23.380279868710552,
-     'alpha_decoy': False,
-     'beta_peptide': 'VTEFKYGAK',
-     'beta_modifications': {5: ('DSS', 138.06808)},
-     'beta_peptide_crosslink_position': 5,
-     'beta_proteins': ['sp'],
-     'beta_proteins_crosslink_positions': [272],
-     'beta_proteins_peptide_positions': [268],
-     'beta_score': 52.214502774371496,
-     'beta_decoy': False,
-     'crosslink_type': 'inter',
-     'score': 23.380279868710552,
-     'spectrum_file': 'XLpeplib_Beveridge_QEx-HFX_DSS_R1.raw',
-     'scan_nr': 9474,
-     'charge': 3,
-     'retention_time': 2945.7904200000003,
-     'ion_mobility': 0.0,
-     'additional_information': None}
+    Data Type:                          crosslink-spectrum-match
+    Completeness:                       full
+    Alpha Peptide:                      KVTVK
+    Alpha Modifications:                {1: ('DSS', 138.06808)}
+    Alpha Peptide Crosslink Position:   1
+    Alpha Proteins:                     ['Cas9']
+    Alpha Proteins Crosslink Positions: [562]
+    Alpha Proteins Peptide Positions:   [562]
+    Alpha Peptide Score:                59.078359485843485
+    Alpha Decoy:                        False
+    Beta Peptide:                       TKIAQLADLVK
+    Beta Modifications:                 {2: ('DSS', 138.06808)}
+    Beta Peptide Crosslink Position:    2
+    Beta Proteins:                      ['sp']
+    Beta Proteins Crosslink Positions:  [93]
+    Beta Proteins Peptide Positions:    [92]
+    Beta Peptide Score:                 23.04566358838272
+    Beta Decoy:                         True
+    Crosslink Type:                     inter
+    CSM Score:                          23.04566358838272
+    Spectrum File:                      XLpeplib_Beveridge_QEx-HFX_DSS_R1.raw
+    Scan Number:                        15849
+    Precursor Charge:                   3
+    Retention Time:                     4356.45162
+    Ion Mobility/FAIMS CV:              0.0
 ```
 </Callout>
-
 
 Here would be a random example crosslink-spectrum-match from `"One"` and as you can see only one of the two peptides is from Cas9.
 
@@ -437,28 +514,27 @@ Via `"Both"` we get all crosslinks where both peptides are of one of the specifi
 
 
 ```python copy
-random.choice(xls_cas9["Both"])
+random_xl = random.choice(xls_cas9["Both"])
+transform.display(random_xl)
 ```
 <Callout emoji="✓">
 ```
-    {'data_type': 'crosslink',
-     'completeness': 'full',
-     'alpha_peptide': 'KSEETITPWNFEEVVDK',
-     'alpha_peptide_crosslink_position': 1,
-     'alpha_proteins': ['Cas9'],
-     'alpha_proteins_crosslink_positions': [472],
-     'alpha_decoy': False,
-     'beta_peptide': 'QITKHVAQILDSR',
-     'beta_peptide_crosslink_position': 4,
-     'beta_proteins': ['Cas9'],
-     'beta_proteins_crosslink_positions': [933],
-     'beta_decoy': False,
-     'crosslink_type': 'intra',
-     'score': 123.60677704209819,
-     'additional_information': None}
+    Data Type:                          crosslink
+    Completeness:                       full
+    Alpha Peptide:                      VLSAYNKHR
+    Alpha Peptide Crosslink Position:   7
+    Alpha Proteins:                     ['Cas9']
+    Alpha Proteins Crosslink Positions: [1300]
+    Alpha Decoy:                        True
+    Beta Peptide:                       YKEPLQQR
+    Beta Peptide Crosslink Position:    2
+    Beta Proteins:                      ['Cas9']
+    Beta Proteins Crosslink Positions:  [1023]
+    Beta Decoy:                         True
+    Crosslink Type:                     intra
+    Crosslink Score:                    12.803290867950926
 ```
 </Callout>
-
 
 Here would be a random example crosslink from `"Both"` and as you can see both peptides are from Cas9.
 
@@ -477,28 +553,27 @@ Via `"One"` we get all crosslinks where only one of the two crosslinked peptides
 
 
 ```python copy
-random.choice(xls_cas9["One"])
+random_xl = random.choice(xls_cas9["One"])
+transform.display(random_xl)
 ```
 <Callout emoji="✓">
 ```
-    {'data_type': 'crosslink',
-     'completeness': 'full',
-     'alpha_peptide': 'KAMAYWTGSFRAK',
-     'alpha_peptide_crosslink_position': 1,
-     'alpha_proteins': ['sp'],
-     'alpha_proteins_crosslink_positions': [155],
-     'alpha_decoy': True,
-     'beta_peptide': 'NSDKLIAR',
-     'beta_peptide_crosslink_position': 4,
-     'beta_proteins': ['Cas9'],
-     'beta_proteins_crosslink_positions': [1122],
-     'beta_decoy': True,
-     'crosslink_type': 'inter',
-     'score': 14.236170633441338,
-     'additional_information': None}
+    Data Type:                          crosslink
+    Completeness:                       full
+    Alpha Peptide:                      NSDKLIAR
+    Alpha Peptide Crosslink Position:   4
+    Alpha Proteins:                     ['Cas9']
+    Alpha Proteins Crosslink Positions: [1122]
+    Alpha Decoy:                        False
+    Beta Peptide:                       TKYNALKTPDK
+    Beta Peptide Crosslink Position:    2
+    Beta Proteins:                      ['sp']
+    Beta Proteins Crosslink Positions:  [145]
+    Beta Decoy:                         False
+    Crosslink Type:                     inter
+    Crosslink Score:                    30.31260863093563
 ```
 </Callout>
-
 
 Here would be a random example crosslink from `"One"` and as you can see only one of the two peptides is from Cas9.
 
@@ -613,7 +688,7 @@ print(f"Nr. of TT CSMs: {len(csms)}")
 ```
     Nr. of TT CSMs: 786
 ```
-</Callout>  
+</Callout>
 
 Here is an example of calling `targets_only()` on a list of crosslink-spectrum-matches: a list of crosslink-spectrum-matches containing only target-target matches is returned.
 
