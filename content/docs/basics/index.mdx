@@ -11,7 +11,10 @@ on your system at this point, if not please refer to ➡️ [Installation](/docs
 The following abbreviations are commonly used throughout the documentation:
 
 - **CSMs**: Crosslink-Spectrum-Matches ➡️ Crosslink associated with a specific mass spectrum.
-- **XLs**: Crosslinks/residue pairs (_the two terms are used interchangeably_) ➡️ Two specific protein residues that are connected via a crosslinker.
+- **XLs**: Crosslinks ➡️ peptide pairs or residue pairs:
+  - Peptide pairs ➡️ Two specific peptides that are connected via a crosslinker.
+  - Residue pairs ➡️ Two specific protein residues that are connected via a crosslinker.
+  - To ensure your crosslinks are unique peptide/residue pairs use `transform.unique()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.aggregate.unique), [page](/docs/transform/aggregate)\].
 - **FDR**: False-Discovery-Rate ➡️ Commonly used quality metric in proteomics.
 
 ## Following Along
