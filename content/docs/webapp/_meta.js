@@ -4,5 +4,6 @@ export default {
   'filter': 'Filtering Results',
   'visualize': 'Visualizing Results',
   'export': 'Exporting Results',
+  'features': 'Feature Support',
   'help': 'Getting Help'
 }
