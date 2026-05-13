@@ -26,7 +26,9 @@ const navbar = (
   />
 )
 const footer = <Footer>{new Date().getFullYear()} © Bioinformatics Research Group, FH Oberösterreich Campus Hagenberg</Footer>
- 
+
+const banner = <Banner storageKey="new-version">🎉 pyXLMS 1.8.11 is released. <a href="https://github.com/hgb-bin-proteomics/pyXLMS/releases" target="_blank">Read more →</a></Banner>
+
 export default async function RootLayout({ children }) {
   return (
     <html
@@ -44,6 +46,7 @@ export default async function RootLayout({ children }) {
       </Head>
       <body>
         <Layout
+          banner = {banner}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/michabirklbauer/pyXLMS-docs/tree/master"
