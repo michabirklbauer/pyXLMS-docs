@@ -2,7 +2,7 @@ import { Callout } from 'nextra/components'
 
 # \[Re-\]Annotating Decoy Labels
 
-If your crosslink-spectrum-matches or crosslinks have incorrect or missing decoy labels you might want to \[re-\]annotate them for down-stream analysis. The examples below show how to do that with the pyXLMS function `transform.reannotate_decoy_labels()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels)\].
+If your crosslink-spectrum-matches or crosslinks have incorrect or missing decoy labels you might want to \[re-\]annotate them for down-stream analysis. The examples below show how to do that with the pyXLMS function `transform.reannotate_decoy_labels()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels)\].
 
 
 ```python copy
@@ -76,7 +76,7 @@ csms_none = transform.reannotate_decoy_labels(
 ```
 </Callout>
 
-We are actually using our `transform.reannotate_decoy_labels()` function here to create some dummy data without decoy labels. Passing `by_mapping={True: None, False: None}` to the function means we label anything that has `"alpha_decoy"` or `"beta_decoy"` with value `True` or `False` as `None`. In reality one would of course rather use something like `by_mapping={None: False}` which would label all data with `"alpha_decoy"` or `"beta_decoy"` being `None` to `False` (meaning they would be considered target hits). This could be useful if you read results from a search engine that does not label their CSMs or crosslinks but you know that all of them are target hits. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+We are actually using our `transform.reannotate_decoy_labels()` function here to create some dummy data without decoy labels. Passing `by_mapping={True: None, False: None}` to the function means we label anything that has `"alpha_decoy"` or `"beta_decoy"` with value `True` or `False` as `None`. In reality one would of course rather use something like `by_mapping={None: False}` which would label all data with `"alpha_decoy"` or `"beta_decoy"` being `None` to `False` (meaning they would be considered target hits). This could be useful if you read results from a search engine that does not label their CSMs or crosslinks but you know that all of them are target hits. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels).
 
 
 ```python copy
@@ -303,7 +303,7 @@ crosslinks_reannotated = transform.reannotate_decoy_labels(
 ```
 </Callout>
 
-By calling `transform.reannotate_decoy_labels(crosslinks, by_decoy_protein_prefix="REV__")` we can signal the function that any protein starting with a `"REV__"` string should be considered a decoy match. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+By calling `transform.reannotate_decoy_labels(crosslinks, by_decoy_protein_prefix="REV__")` we can signal the function that any protein starting with a `"REV__"` string should be considered a decoy match. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels).
 
 
 ```python copy
@@ -461,7 +461,7 @@ crosslinks_reannotated = transform.reannotate_decoy_labels(
 ```
 </Callout>
 
-By calling `transform.reannotate_decoy_labels(crosslinks, by_decoy_protein_substring="REV__")` we can signal the function that any protein containing a `"REV__"` string anywhere should be considered a decoy match. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+By calling `transform.reannotate_decoy_labels(crosslinks, by_decoy_protein_substring="REV__")` we can signal the function that any protein containing a `"REV__"` string anywhere should be considered a decoy match. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels).
 
 
 ```python copy
@@ -525,7 +525,7 @@ csms_reannotated = transform.reannotate_decoy_labels(
 ```
 </Callout>
 
-By calling `transform.reannotate_decoy_labels(csms_none, by_target_fasta="../../data/_fasta/Cas9_plus10.fasta")` we can signal the function that any peptide/protein **NOT IN** the FASTA file `"../../data/_fasta/Cas9_plus10.fasta"` should be considered a decoy match. In the background this checks if the FASTA file contains the peptide sequence and does not use protein names. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+By calling `transform.reannotate_decoy_labels(csms_none, by_target_fasta="../../data/_fasta/Cas9_plus10.fasta")` we can signal the function that any peptide/protein **NOT IN** the FASTA file `"../../data/_fasta/Cas9_plus10.fasta"` should be considered a decoy match. In the background this checks if the FASTA file contains the peptide sequence and does not use protein names. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels).
 
 
 ```python copy
@@ -600,7 +600,7 @@ csms_reannotated = transform.reannotate_decoy_labels(
 ```
 </Callout>
 
-We can do the inverse operation by calling `transform.reannotate_decoy_labels(csms_none, by_decoy_fasta="../../data/_fasta/Cas9_plus10.fasta")` where we signal the function that any peptide/protein **IN** the FASTA file `"../../data/_fasta/Cas9_plus10.fasta"` should be considered a decoy match. In the background this checks if the FASTA file contains the peptide sequence and does not use protein names. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+We can do the inverse operation by calling `transform.reannotate_decoy_labels(csms_none, by_decoy_fasta="../../data/_fasta/Cas9_plus10.fasta")` where we signal the function that any peptide/protein **IN** the FASTA file `"../../data/_fasta/Cas9_plus10.fasta"` should be considered a decoy match. In the background this checks if the FASTA file contains the peptide sequence and does not use protein names. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels).
 
 
 ```python copy
@@ -684,8 +684,12 @@ Let's consider a list of `crosslinks` containing the above example crosslink whe
 
 ```python copy
 from typing import Dict, Any, Tuple
+# for pyXLMS >= 2.0.0 you would need to import:
+# from pyXLMS.data import CrosslinkSpectrumMatch, Crosslink
 
 
+# for pyXLMS >= 2.0.0 the function signature changes to:
+# def parse_alpha_beta_target_decoy(crosslink: CrosslinkSpectrumMatch | Crosslink) -> Tuple[bool, bool]:
 def parse_alpha_beta_target_decoy(crosslink: Dict[str, Any]) -> Tuple[bool, bool]:
     is_decoy_alpha: bool = crosslink["additional_information"]["Decoy Class"][0] == "D"
     is_decoy_beta: bool = crosslink["additional_information"]["Decoy Class"][1] == "D"
@@ -703,7 +707,7 @@ crosslinks_reannotated = transform.reannotate_decoy_labels(
 ```
 </Callout>
 
-We can write our own function to parse decoy labels such as `parse_alpha_beta_target_decoy()`. The function needs to take a CSM or crosslink as input and should return two boolean values: the first one should be the decoy label for the alpha peptide, and the second one should be the decoy label for the beta peptide. We can then do reannotation by calling `transform.reannotate_decoy_labels(crosslinks, by_function=parse_alpha_beta_target_decoy)` where we pass our custom function as an argument. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels.reannotate_decoy_labels).
+We can write our own function to parse decoy labels such as `parse_alpha_beta_target_decoy()`. The function needs to take a CSM or crosslink as input and should return two boolean values: the first one should be the decoy label for the alpha peptide, and the second one should be the decoy label for the beta peptide. We can then do reannotation by calling `transform.reannotate_decoy_labels(crosslinks, by_function=parse_alpha_beta_target_decoy)` where we pass our custom function as an argument. You can read more about the `transform.reannotate_decoy_labels()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_decoy_labels).
 
 
 ```python copy
