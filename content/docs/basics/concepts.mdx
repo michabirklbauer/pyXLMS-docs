@@ -26,6 +26,12 @@ of adding it directly to crosslink-spectrum-matches and crosslinks!
 
 </div>
 
+> [!IMPORTANT]
+>
+> **Starting with pyXLMS v2.0.0 crosslink-spectrum-matches, crosslinks, and parser results are now no longer dictionaries but classes**
+> **based on the [Pydantic](https://pydantic.dev/docs/validation/latest/get-started/) [BaseModel](https://pydantic.dev/docs/validation/latest/api/pydantic/base_model/)**
+> **which offers increased type safety and validation. This change is fully backwards compatible and dict-like access still works!**
+
 ## Functions are designed to fail fast
 
 <br/>
@@ -91,6 +97,14 @@ when their data is modified. Generally we recommend using `copy.deepcopy()` when
 the original data:
 
 </div>
+
+> [!CAUTION]
+>
+> **Starting with pyXLMS v2.0.0 changing attributes aside of `"additional_information"` will not work anymore! Please use `copy_with_update()` instead!**
+> **Documentation can be found here for**
+> **[crosslink-spectrum-matches](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.CrosslinkSpectrumMatch.copy_with_update),**
+> **[crosslinks](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.Crosslink.copy_with_update),**
+> **and [parser results](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.ParserResult.copy_with_update).**
 
 ```python copy
 import copy
