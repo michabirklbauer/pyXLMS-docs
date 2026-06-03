@@ -2,7 +2,7 @@ import { Callout } from 'nextra/components'
 
 # \[Re-\]Annotating Crosslinked Protein Positions
 
-If your crosslink-spectrum-matches or crosslinks have incorrect or missing protein labels/protein crosslink positions you might want to \[re-\]annotate them for down-stream analysis since most tools need that information. The examples below show how to do that with the pyXLMS function `transform.reannotate_positions()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions.reannotate_positions)\].
+If your crosslink-spectrum-matches or crosslinks have incorrect or missing protein labels/protein crosslink positions you might want to \[re-\]annotate them for down-stream analysis since most tools need that information. The examples below show how to do that with the pyXLMS function `transform.reannotate_positions()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions)\].
 
 
 ```python copy
@@ -92,7 +92,7 @@ csms = transform.reannotate_positions(csms, fasta="../../data/_fasta/Cas9_plus10
 ```
 </Callout>
 
-We can then re-annotate the corresponding protein accessions and protein crosslink positions using the function `transform.reannotate_positions()` and passing the CSMs as the first argument and the fasta file as the second argument or via the `fasta` parameter. You can read more about the `reannotate_position()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions.reannotate_positions).
+We can then re-annotate the corresponding protein accessions and protein crosslink positions using the function `transform.reannotate_positions()` and passing the CSMs as the first argument and the fasta file as the second argument or via the `fasta` parameter. You can read more about the `reannotate_position()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions).
 
 
 ```python copy
@@ -157,7 +157,7 @@ xls = transform.reannotate_positions(xls, fasta="../../data/_fasta/Cas9_plus10.f
 ```
 </Callout>
 
-We can then re-annotate the corresponding protein accessions and protein crosslink positions using the function `transform.reannotate_positions()` and passing the crosslinks as the first argument and the fasta file as the second argument or via the `fasta` parameter. You can read more about the `reannotate_position()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions.reannotate_positions).
+We can then re-annotate the corresponding protein accessions and protein crosslink positions using the function `transform.reannotate_positions()` and passing the crosslinks as the first argument and the fasta file as the second argument or via the `fasta` parameter. You can read more about the `reannotate_position()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions).
 
 
 ```python copy
@@ -213,7 +213,7 @@ parser_result = transform.reannotate_positions(
 ```
 </Callout>
 
-We can then re-annotate the corresponding protein accessions and protein crosslink positions using the function `transform.reannotate_positions()` and passing the `parser_result` as the first argument and the fasta file as the second argument or via the `fasta` parameter. You can read more about the `reannotate_position()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions.reannotate_positions).
+We can then re-annotate the corresponding protein accessions and protein crosslink positions using the function `transform.reannotate_positions()` and passing the `parser_result` as the first argument and the fasta file as the second argument or via the `fasta` parameter. You can read more about the `reannotate_position()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions).
 
 
 ```python copy
@@ -375,7 +375,7 @@ def my_fasta_title_parser(title: str) -> str:
     return title[2:].strip("|") if title.startswith("sp") else title.strip("|")
 ```
 
-To resolve this problem we need to implement a function that parses the correct protein accession (or unique identifier) from the fasta header/title, such as the above `my_fasta_title_parser()`. By default the `reannotate_positions()` function uses the `transform.fasta_title_to_accession()` function for that purpose which expects fasta headers/titles to be in [standard UniProtKB format](https://www.uniprot.org/help/fasta-headers). You can read more about the `fasta_title_to_accession()` function and its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.reannotate_positions.fasta_title_to_accession).
+To resolve this problem we need to implement a function that parses the correct protein accession (or unique identifier) from the fasta header/title, such as the above `my_fasta_title_parser()`. By default the `reannotate_positions()` function uses the `transform.fasta_title_to_accession()` function for that purpose which expects fasta headers/titles to be in [standard UniProtKB format](https://www.uniprot.org/help/fasta-headers). You can read more about the `fasta_title_to_accession()` function and its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.fasta_title_to_accession).
 
 
 ```python copy
