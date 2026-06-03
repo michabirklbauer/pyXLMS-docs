@@ -55,7 +55,7 @@ for k, v in parser_result.items():
 ```
 </Callout>
 
-The `parser.read()` method returns a dictionary with a set of specified keys and their values. We refer to this dictionary as a `parser_result` object. All `parser.read*` methods return such a `parser_result` object, you can read more about that here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_parser_result), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+The `parser.read()` method returns a dictionary with a set of specified keys and their values. We refer to this dictionary as a `parser_result` object. All `parser.read*` methods return such a `parser_result` object, you can read more about that here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_parser_result), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
 As you can see from the `parser_result` the mzIdentML result file contained CSMs. We would be able to access those via `parser_result["crosslink-spectrum-matches"]`.
 
@@ -77,7 +77,7 @@ _ = transform.summary(parser_result)
 ```
 </Callout>
 
-With the `transform.summary()` method we can also print out some summary statistics about our read CSMs. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+With the `transform.summary()` method we can also print out some summary statistics about our read CSMs. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -116,7 +116,7 @@ for k, v in sample_csm.items():
 ```
 </Callout>
 
-Here is an example CSM, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_csm), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+Here is an example CSM, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_csm), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
 *****
 
@@ -149,7 +149,7 @@ parser_result = parser.read_mzid(
 ```
 </Callout>
 
-We can also read any mzIdentML result file using the `parser.read_mzid()` method which allows a more nuanced control over reading mzIdentML result files - even though theoretically everything can be done with the `parser.read()` function as well. You can read the documentation for the `parser.read_mzid()` method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_mzid.read_mzid).
+We can also read any mzIdentML result file using the `parser.read_mzid()` method which allows a more nuanced control over reading mzIdentML result files - even though theoretically everything can be done with the `parser.read()` function as well. You can read the documentation for the `parser.read_mzid()` method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read_mzid).
 
 
 ```python copy
@@ -171,4 +171,4 @@ _ = transform.summary(parser_result)
 
 *****
 
-There are several other parameters that can be set, you can read more about them here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_mzid.read_mzid).
+There are several other parameters that can be set, you can read more about them here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read_mzid).
