@@ -53,14 +53,14 @@ xls = targets_only(validate(xls))
 
 > [!IMPORTANT]
 >
-> **For down-stream analysis with xiNET or xiVIEW you would usually want to only consider high-confidence target crosslinks, either by pre-filtering in the search engine of your choice or via the pyXLMS functions `validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate.validate)\] and `targets_only()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.targets_only.targets_only)\]!**
+> **For down-stream analysis with xiNET or xiVIEW you would usually want to only consider high-confidence target crosslinks, either by pre-filtering in the search engine of your choice or via the pyXLMS functions `validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate)\] and `targets_only()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.targets_only)\]!**
 
 
 ```python copy
 _df = exporter.to_xinet(xls, filename=None)
 ```
 
-The function `exporter.to_xinet()` exports a list of crosslinks to [xiNET](https://doi.org/10.1074/mcp.o114.042259) format. The tool xiNET is accessible via the link [crosslinkviewer.org](https://crosslinkviewer.org/). Requires that `alpha_proteins`, `beta_proteins`, `alpha_proteins_crosslink_positions` and `beta_proteins_crosslink_positions` fields are set for all crosslinks. You can read more about the `to_xinet()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xinet.to_xinet).
+The function `exporter.to_xinet()` exports a list of crosslinks to [xiNET](https://doi.org/10.1074/mcp.o114.042259) format. The tool xiNET is accessible via the link [crosslinkviewer.org](https://crosslinkviewer.org/). Requires that `alpha_proteins`, `beta_proteins`, `alpha_proteins_crosslink_positions` and `beta_proteins_crosslink_positions` fields are set for all crosslinks. You can read more about the `to_xinet()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xinet).
 
 > [!TIP]
 >
@@ -71,7 +71,7 @@ The function `exporter.to_xinet()` exports a list of crosslinks to [xiNET](https
 _df = exporter.to_xiview(xls, filename=None)
 ```
 
-The function `exporter.to_xiview()` exports a list of crosslinks to [xiVIEW](https://doi.org/10.1016/j.jmb.2024.168656) format. The tool xiVIEW is accessible via the link [xiview.org](https://xiview.org/). Requires that `alpha_proteins`, `beta_proteins`, `alpha_proteins_crosslink_positions` and `beta_proteins_crosslink_positions` fields are set for all crosslinks. You can read more about the `to_xiview()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xiview.to_xiview).
+The function `exporter.to_xiview()` exports a list of crosslinks to [xiVIEW](https://doi.org/10.1016/j.jmb.2024.168656) format. The tool xiVIEW is accessible via the link [xiview.org](https://xiview.org/). Requires that `alpha_proteins`, `beta_proteins`, `alpha_proteins_crosslink_positions` and `beta_proteins_crosslink_positions` fields are set for all crosslinks. You can read more about the `to_xiview()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xiview).
 
 > [!TIP]
 >
