@@ -35,24 +35,24 @@ crosslinks and crosslink-spectrum-matches.
 
 The following abbreviations are used:
 - **CSMs:** crosslink-spectrum-matches
-- **XLs:** crosslinks/residue pairs
+- **XLs:** crosslinks/peptide pairs/residue pairs
 
 The following export options are currently available:
 
 | Tool/Format                             | Exporter                      | CSMs | XLs | Page                                     | API Docs | Tool Link |
 |:----------------------------------------|:------------------------------|:----:|:---:|:-----------------------------------------|:---------|:----------|
-| pandas.DataFrame/`.csv`/`.xlsx`/`.json` | `transform.to_dataframe()`    | ✅  | ✅  | [link](/docs/transform/summary_and_util) | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_dataframe.to_dataframe) |   |
-| AlphaLink2                              | `exporter.to_alphalink2()`    | ❌  | ✅  | [link](/docs/exporters/to_alphalink2)    | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_alphalink2.to_alphalink2) | [link](https://github.com/Rappsilber-Laboratory/AlphaLink2) |
-| IMP-X-FDR                               | `exporter.to_impxfdr()`       | ✅  | ✅  | [link](/docs/exporters/to_impxfdr)       | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_impxfdr.to_impxfdr) | [link](https://github.com/vbc-proteomics-org/imp-x-fdr) |
-| MS Annika                               | `exporter.to_msannika()`      | ✅  | ✅  | [link](/docs/exporters/to_msannika)      | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_msannika.to_msannika) | [link](https://github.com/hgb-bin-proteomics/MSAnnika) |
-| ProXL                                   | `exporter.to_proxl()`         | ✅  | ❌  | [link](/docs/exporters/to_proxl)         | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_proxl.to_proxl) | [link](https://www.yeastrc.org/proxl_public/) |
-| PyXlinkViewer (PyMOL)                   | `exporter.to_pyxlinkviewer()` | ❌  | ✅  | [link](/docs/exporters/to_pyxlinkviewer) | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_pyxlinkviewer.to_pyxlinkviewer) | [link](https://github.com/BobSchiffrin/PyXlinkViewer) |
-| xiFDR                                   | `exporter.to_xifdr()`         | ✅  | ❌  | [link](/docs/exporters/to_xifdr)         | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xifdr.to_xifdr) | [link](https://www.rappsilberlab.org/software/xifdr/) |
-| xiNET                                   | `exporter.to_xinet()`         | ❌  | ✅  | [link](/docs/exporters/to_xinet_xiview)  | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xinet.to_xinet) | [link](https://crosslinkviewer.org/index.php) |
-| xiVIEW                                  | `exporter.to_xiview()`        | ✅  | ✅  | [link](/docs/exporters/to_xinet_xiview)  | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xiview.to_xiview) | [link](https://www.xiview.org/index.php) |
-| XlinkDB                                 | `exporter.to_xlinkdb()`       | ❌  | ✅  | [link](/docs/exporters/to_xlinkdb)       | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xlinkdb.to_xlinkdb) | [link](https://xlinkdb.gs.washington.edu/xlinkdb/) |
-| xlms-tools                              | `exporter.to_xlmstools()`     | ❌  | ✅  | [link](/docs/exporters/to_xlmstools)     | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xlmstools.to_xlmstools) | [link](https://gitlab.com/topf-lab/xlms-tools) |
-| XMAS (ChimeraX)                         | `exporter.to_xmas()`          | ❌  | ✅  | [link](/docs/exporters/to_xmas)          | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xmas.to_xmas) | [link](https://github.com/ScheltemaLab/ChimeraX_XMAS_bundle) |
+| pandas.DataFrame/`.csv`/`.xlsx`/`.json` | `transform.to_dataframe()`    | ✅  | ✅  | [link](/docs/transform/summary_and_util) | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_dataframe) |   |
+| AlphaLink2                              | `exporter.to_alphalink2()`    | ❌  | ✅  | [link](/docs/exporters/to_alphalink2)    | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_alphalink2) | [link](https://github.com/Rappsilber-Laboratory/AlphaLink2) |
+| IMP-X-FDR                               | `exporter.to_impxfdr()`       | ✅  | ✅  | [link](/docs/exporters/to_impxfdr)       | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_impxfdr) | [link](https://github.com/vbc-proteomics-org/imp-x-fdr) |
+| MS Annika                               | `exporter.to_msannika()`      | ✅  | ✅  | [link](/docs/exporters/to_msannika)      | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_msannika) | [link](https://github.com/hgb-bin-proteomics/MSAnnika) |
+| ProXL                                   | `exporter.to_proxl()`         | ✅  | ❌  | [link](/docs/exporters/to_proxl)         | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_proxl) | [link](https://www.yeastrc.org/proxl_public/) |
+| PyXlinkViewer (PyMOL)                   | `exporter.to_pyxlinkviewer()` | ❌  | ✅  | [link](/docs/exporters/to_pyxlinkviewer) | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_pyxlinkviewer) | [link](https://github.com/BobSchiffrin/PyXlinkViewer) |
+| xiFDR                                   | `exporter.to_xifdr()`         | ✅  | ❌  | [link](/docs/exporters/to_xifdr)         | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xifdr) | [link](https://www.rappsilberlab.org/software/xifdr/) |
+| xiNET                                   | `exporter.to_xinet()`         | ❌  | ✅  | [link](/docs/exporters/to_xinet_xiview)  | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xinet) | [link](https://crosslinkviewer.org/index.php) |
+| xiVIEW                                  | `exporter.to_xiview()`        | ✅  | ✅  | [link](/docs/exporters/to_xinet_xiview)  | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xiview) | [link](https://www.xiview.org/index.php) |
+| XlinkDB                                 | `exporter.to_xlinkdb()`       | ❌  | ✅  | [link](/docs/exporters/to_xlinkdb)       | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xlinkdb) | [link](https://xlinkdb.gs.washington.edu/xlinkdb/) |
+| xlms-tools                              | `exporter.to_xlmstools()`     | ❌  | ✅  | [link](/docs/exporters/to_xlmstools)     | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xlmstools) | [link](https://gitlab.com/topf-lab/xlms-tools) |
+| XMAS (ChimeraX)                         | `exporter.to_xmas()`          | ❌  | ✅  | [link](/docs/exporters/to_xmas)          | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xmas) | [link](https://github.com/ScheltemaLab/ChimeraX_XMAS_bundle) |
 
 ## API Summary
 
@@ -60,15 +60,15 @@ Here's a quick summary of the available functions, their page links and their AP
 
 | Function Name                                         | Page                                         | API Docs |
 |:------------------------------------------------------|:--------------------------------------------:|:--------:|
-| `exporter.to_alphalink2()`                            | [link](/docs/exporters/to_alphalink2)        | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_alphalink2.to_alphalink2) |
-| `exporter.to_impxfdr()`                               | [link](/docs/exporters/to_impxfdr)           | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_impxfdr.to_impxfdr) |
-| `exporter.get_msannika_crosslink_sequence()`          |                                              | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_msannika.get_msannika_crosslink_sequence) |
-| `exporter.to_msannika()`                              | [link](/docs/exporters/to_msannika)          | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_msannika.to_msannika) |
-| `exporter.to_proxl()`                                 | [link](/docs/exporters/to_proxl)             | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_proxl.to_proxl) |
-| `exporter.to_pyxlinkviewer()`                         | [link](/docs/exporters/to_pyxlinkviewer)     | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_pyxlinkviewer.to_pyxlinkviewer) |
-| `exporter.to_xifdr()`                                 | [link](/docs/exporters/to_xifdr)             | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xifdr.to_xifdr) |
-| `exporter.to_xinet()`                                 | [link](/docs/exporters/to_xinet_xiview)      | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xinet.to_xinet) |
-| `exporter.to_xiview()`                                | [link](/docs/exporters/to_xinet_xiview)      | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xiview.to_xiview) |
-| `exporter.to_xlinkdb()`                               | [link](/docs/exporters/to_xlinkdb)           | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xlinkdb.to_xlinkdb) |
-| `exporter.to_xlmstools()`                             | [link](/docs/exporters/to_xlmstools)         | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xlmstools.to_xlmstools) |
-| `exporter.to_xmas()`                                  | [link](/docs/exporters/to_xmas)              | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xmas.to_xmas) |
+| `exporter.to_alphalink2()`                            | [link](/docs/exporters/to_alphalink2)        | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_alphalink2) |
+| `exporter.to_impxfdr()`                               | [link](/docs/exporters/to_impxfdr)           | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_impxfdr) |
+| `exporter.get_msannika_crosslink_sequence()`          |                                              | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.get_msannika_crosslink_sequence) |
+| `exporter.to_msannika()`                              | [link](/docs/exporters/to_msannika)          | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_msannika) |
+| `exporter.to_proxl()`                                 | [link](/docs/exporters/to_proxl)             | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_proxl) |
+| `exporter.to_pyxlinkviewer()`                         | [link](/docs/exporters/to_pyxlinkviewer)     | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_pyxlinkviewer) |
+| `exporter.to_xifdr()`                                 | [link](/docs/exporters/to_xifdr)             | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xifdr) |
+| `exporter.to_xinet()`                                 | [link](/docs/exporters/to_xinet_xiview)      | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xinet) |
+| `exporter.to_xiview()`                                | [link](/docs/exporters/to_xinet_xiview)      | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xiview) |
+| `exporter.to_xlinkdb()`                               | [link](/docs/exporters/to_xlinkdb)           | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xlinkdb) |
+| `exporter.to_xlmstools()`                             | [link](/docs/exporters/to_xlmstools)         | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xlmstools) |
+| `exporter.to_xmas()`                                  | [link](/docs/exporters/to_xmas)              | [link](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_xmas) |

@@ -53,13 +53,13 @@ pyXLMS offers false-discovery-rate (FDR) estimation and validation of crosslink-
 
 ```python filename="src/pyXLMS/transform/validate.py"
 def validate(
-    data: List[Dict[str, Any]] | Dict[str, Any],
+    data: List[CrosslinkSpectrumMatch] | List[Crosslink] | ParserResult,
     fdr: float = 0.01,
     formula: Literal["D/T", "(TD+DD)/TT", "(TD-DD)/TT"] = "D/T",
     score: Literal["higher_better", "lower_better"] = "higher_better",
     separate_intra_inter: bool = False,
     ignore_missing_labels: bool = False,
-) -> List[Dict[str, Any]] | Dict[str, Any]
+) -> List[CrosslinkSpectrumMatch] | List[Crosslink] | ParserResult
 ```
 
 The function has 6 possible parameters:
@@ -108,7 +108,7 @@ _ = transform.summary(csms)
 ```
 </Callout>
 
-Before validation, let's have a look at our non-validated crosslink-spectrum-matches using the `transform.summary()` function which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+Before validation, let's have a look at our non-validated crosslink-spectrum-matches using the `transform.summary()` function which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -120,7 +120,7 @@ validated_csms = transform.validate(csms)
 ```
 </Callout>
 
-We can validate our CSMs using the `transform.validate()` function. For strict validation that targets a 1% false-discovery-rate we can leave all optional parameters at their default values. You can read more about the `validate()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate.validate).
+We can validate our CSMs using the `transform.validate()` function. For strict validation that targets a 1% false-discovery-rate we can leave all optional parameters at their default values. You can read more about the `validate()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate).
 
 > [!IMPORTANT]
 >
@@ -204,7 +204,7 @@ _ = transform.summary(xls)
 ```
 </Callout>
 
-Before validation, let's have a look at our non-validated crosslinks using the `transform.summary()` function which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+Before validation, let's have a look at our non-validated crosslinks using the `transform.summary()` function which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -216,7 +216,7 @@ validated_xls = transform.validate(xls)
 ```
 </Callout>
 
-Similarly to validating CSMs, we can validate our crosslinks using the `transform.validate()` function. For strict validation that targets a 1% false-discovery-rate we can leave all optional parameters at their default values. You can read more about the `validate()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate.validate).
+Similarly to validating CSMs, we can validate our crosslinks using the `transform.validate()` function. For strict validation that targets a 1% false-discovery-rate we can leave all optional parameters at their default values. You can read more about the `validate()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate).
 
 > [!IMPORTANT]
 >
@@ -292,7 +292,7 @@ parser_result = transform.validate(parser_result)
 ```
 </Callout>
 
-We can validate our complete `parser_result` using the `transform.validate()` function as well. For strict validation that targets a 1% false-discovery-rate we can leave all optional parameters at their default values. You can read more about the `validate()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate.validate).
+We can validate our complete `parser_result` using the `transform.validate()` function as well. For strict validation that targets a 1% false-discovery-rate we can leave all optional parameters at their default values. You can read more about the `validate()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate).
 
 
 ```python copy

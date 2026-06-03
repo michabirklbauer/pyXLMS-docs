@@ -62,7 +62,7 @@ transform.display(parser_result)
 ```
 </Callout>
 
-The `parser.read()` method returns a dictionary with a set of specified keys and their values. We refer to this dictionary as a `parser_result` object. All `parser.read*` methods return such a `parser_result` object, you can read more about that here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_parser_result), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+The `parser.read()` method returns a dictionary with a set of specified keys and their values. We refer to this dictionary as a `parser_result` object. All `parser.read*` methods return such a `parser_result` object, you can read more about that here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_parser_result), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
 As you can see from the `parser_result` the compressed result file contained crosslinks. We would be able to access those via `parser_result["crosslinks"]`. We will do this a bit further down.
 
@@ -85,7 +85,7 @@ _ = transform.summary(parser_result)
 ```
 </Callout>
 
-With the `transform.summary()` method we can also print out some summary statistics about our read crosslinks. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+With the `transform.summary()` method we can also print out some summary statistics about our read crosslinks. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -113,7 +113,7 @@ transform.display(sample_xl)
 
 Using `parser_result["crosslinks"][0]` we can get the first crosslink of the file and take a closer look at that.
 
-Here is an example crosslink, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_crosslink), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+Here is an example crosslink, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_crosslink), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
 *****
 

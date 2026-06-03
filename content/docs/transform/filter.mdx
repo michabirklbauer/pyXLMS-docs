@@ -54,7 +54,7 @@ For easier access we assign our crosslink-spectrum-matches to the variable `csms
 csms_by_crosslink_type = transform.filter_crosslink_type(csms)
 ```
 
-We can filter crosslink-spectrum-matches by their crosslink type (intra-links and inter-links) by calling `transform.filter_crosslink_type()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the keys `"Intra"` and `"Inter"` with their associated values being lists of intra-link CSMs and inter-link CSMs respectively. You can read more about the `filter_crosslink_type()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_crosslink_type).
+We can filter crosslink-spectrum-matches by their crosslink type (intra-links and inter-links) by calling `transform.filter_crosslink_type()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the keys `"Intra"` and `"Inter"` with their associated values being lists of intra-link CSMs and inter-link CSMs respectively. You can read more about the `filter_crosslink_type()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_crosslink_type).
 
 
 ```python copy
@@ -79,7 +79,7 @@ Our example file contains 803 intra-link CSMs and 23 inter-link CSMs.
 xls_by_crosslink_type = transform.filter_crosslink_type(xls)
 ```
 
-Similarly, we can filter crosslinks by their crosslink type (intra-links and inter-links) by calling `transform.filter_crosslink_type()` and passing the crosslinks as the first argument. The function returns a dictionary containing the keys `"Intra"` and `"Inter"` with their associated values being lists of intra-link crosslinks and inter-link crosslinks respectively. You can read more about the `filter_crosslink_type()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_crosslink_type).
+Similarly, we can filter crosslinks by their crosslink type (intra-links and inter-links) by calling `transform.filter_crosslink_type()` and passing the crosslinks as the first argument. The function returns a dictionary containing the keys `"Intra"` and `"Inter"` with their associated values being lists of intra-link crosslinks and inter-link crosslinks respectively. You can read more about the `filter_crosslink_type()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_crosslink_type).
 
 
 ```python copy
@@ -106,7 +106,7 @@ Our example file contains 279 intra-link crosslinks and 21 inter-link crosslinks
 csms_by_peptide_pair = transform.filter_peptide_pair_distribution(csms)
 ```
 
-We can filter crosslink-spectrum-matches by their associated peptide pairs by calling `transform.filter_peptide_pair_distribution()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the peptide pairs as keys with their associated values being lists of the corresponding CSMs. You can read more about the `filter_peptide_pair_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_peptide_pair_distribution).
+We can filter crosslink-spectrum-matches by their associated peptide pairs by calling `transform.filter_peptide_pair_distribution()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the peptide pairs as keys with their associated values being lists of the corresponding CSMs. You can read more about the `filter_peptide_pair_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_peptide_pair_distribution).
 
 
 ```python copy
@@ -184,7 +184,7 @@ transform.display(random_csm)
 csms_by_residue_pair = transform.filter_residue_pair_distribution(csms)
 ```
 
-We can filter crosslink-spectrum-matches by their associated residue pairs by calling `transform.filter_residue_pair_distribution()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the residue pairs as keys with their associated values being lists of the corresponding CSMs. You can read more about the `filter_residue_pair_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_residue_pair_distribution).
+We can filter crosslink-spectrum-matches by their associated residue pairs by calling `transform.filter_residue_pair_distribution()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the residue pairs as keys with their associated values being lists of the corresponding CSMs. You can read more about the `filter_residue_pair_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_residue_pair_distribution).
 
 > [!IMPORTANT]
 >
@@ -264,7 +264,7 @@ transform.display(random_csm)
 csms_by_protein = transform.filter_protein_distribution(csms)
 ```
 
-We can filter crosslink-spectrum-matches by their associated proteins by calling `transform.filter_protein_distribution()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the proteins as keys with their associated values being lists of the corresponding CSMs. You can read more about the `filter_protein_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_protein_distribution).
+We can filter crosslink-spectrum-matches by their associated proteins by calling `transform.filter_protein_distribution()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the proteins as keys with their associated values being lists of the corresponding CSMs. You can read more about the `filter_protein_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_protein_distribution).
 
 
 ```python copy
@@ -297,7 +297,7 @@ In total we have 821 crosslink-spectrum-matches where at least one of the two cr
 xls_by_protein = transform.filter_protein_distribution(xls)
 ```
 
-Similarly, we can filter crosslinks by their associated proteins by calling `transform.filter_protein_distribution()` and passing the crosslinks as the first argument. The function returns a dictionary containing the proteins as keys with their associated values being lists of the corresponding crosslinks. You can read more about the `filter_protein_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_protein_distribution).
+Similarly, we can filter crosslinks by their associated proteins by calling `transform.filter_protein_distribution()` and passing the crosslinks as the first argument. The function returns a dictionary containing the proteins as keys with their associated values being lists of the corresponding crosslinks. You can read more about the `filter_protein_distribution()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_protein_distribution).
 
 
 ```python copy
@@ -332,7 +332,7 @@ In total we have 295 crosslinks where at least one of the two crosslinked peptid
 csms_cas9 = transform.filter_proteins(csms, proteins=["Cas9"])
 ```
 
-If we are only interested in crosslink-spectrum-matches of a specific protein (or set of proteins) we can further investigate this with the `transform.filter_proteins()` function and passing the crosslink-spectrum-matches as the first argument. The second argument `proteins` should be a list or set of protein accessions that we are interested in - in the example here we are only interested in a single protein, namely `"Cas9"`. You can read more about the `filter_proteins()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_proteins).
+If we are only interested in crosslink-spectrum-matches of a specific protein (or set of proteins) we can further investigate this with the `transform.filter_proteins()` function and passing the crosslink-spectrum-matches as the first argument. The second argument `proteins` should be a list or set of protein accessions that we are interested in - in the example here we are only interested in a single protein, namely `"Cas9"`. You can read more about the `filter_proteins()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_proteins).
 
 
 ```python copy
@@ -468,7 +468,7 @@ Here would be a random example crosslink-spectrum-match from `"One"` and as you 
 xls_cas9 = transform.filter_proteins(xls, proteins=["Cas9"])
 ```
 
-Similarly, if we are only interested in crosslinks of a specific protein (or set of proteins) we can further investigate this with the `transform.filter_proteins()` function and passing the crosslinks as the first argument. The second argument `proteins` should be a list or set of protein accessions that we are interested in - in the example here we are only interested in a single protein, namely `"Cas9"`. You can read more about the `filter_proteins()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_proteins).
+Similarly, if we are only interested in crosslinks of a specific protein (or set of proteins) we can further investigate this with the `transform.filter_proteins()` function and passing the crosslinks as the first argument. The second argument `proteins` should be a list or set of protein accessions that we are interested in - in the example here we are only interested in a single protein, namely `"Cas9"`. You can read more about the `filter_proteins()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_proteins).
 
 
 ```python copy
@@ -584,7 +584,7 @@ Here would be a random example crosslink from `"One"` and as you can see only on
 csms_td = transform.filter_target_decoy(csms)
 ```
 
-We can filter crosslink-spectrum-matches by their target-decoy type by calling `transform.filter_target_decoy()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the keys `"Target-Target"`, `"Target-Decoy"`, and `"Decoy-Decoy"` with their associated values being lists of the corresponding target-target, target-decoy, and decoy-decoy CSMs respectively. You can read more about the `filter_target_decoy()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_target_decoy).
+We can filter crosslink-spectrum-matches by their target-decoy type by calling `transform.filter_target_decoy()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing the keys `"Target-Target"`, `"Target-Decoy"`, and `"Decoy-Decoy"` with their associated values being lists of the corresponding target-target, target-decoy, and decoy-decoy CSMs respectively. You can read more about the `filter_target_decoy()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_target_decoy).
 
 
 ```python copy
@@ -630,7 +630,7 @@ Via `"Decoy-Decoy"` we can access all crosslink-spectrum-matches where both pept
 xls_td = transform.filter_target_decoy(xls)
 ```
 
-Similarly, we can filter crosslinks by their target-decoy type by calling `transform.filter_target_decoy()` and passing the crosslinks as the first argument. The function returns a dictionary containing the keys `"Target-Target"`, `"Target-Decoy"`, and `"Decoy-Decoy"` with their associated values being lists of the corresponding target-target, target-decoy, and decoy-decoy crosslinks respectively. You can read more about the `filter_target_decoy()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_target_decoy).
+Similarly, we can filter crosslinks by their target-decoy type by calling `transform.filter_target_decoy()` and passing the crosslinks as the first argument. The function returns a dictionary containing the keys `"Target-Target"`, `"Target-Decoy"`, and `"Decoy-Decoy"` with their associated values being lists of the corresponding target-target, target-decoy, and decoy-decoy crosslinks respectively. You can read more about the `filter_target_decoy()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_target_decoy).
 
 
 ```python copy
@@ -677,7 +677,7 @@ Via `"Decoy-Decoy"` we can access all crosslinks where both peptides are from th
 
 ## Filtering Target Matches Only
 
-Because we are often only interested in target-target matches there is a shorthand function that returns only target-target matches called `transform.targets_only()`. In contrast to all previous filter functions `targets_only()` accepts both lists of crosslink-spectrum-matches or crosslinks or a `parser_result` as input (see data type documentation here: [**docs**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md)). The return type will be the same as the input type. You can read more about the `targets_only()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.targets_only.targets_only).
+Because we are often only interested in target-target matches there is a shorthand function that returns only target-target matches called `transform.targets_only()`. In contrast to all previous filter functions `targets_only()` accepts both lists of crosslink-spectrum-matches or crosslinks or a `parser_result` as input (see data type documentation here: [**docs**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md)). The return type will be the same as the input type. You can read more about the `targets_only()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.targets_only).
 
 
 ```python copy
