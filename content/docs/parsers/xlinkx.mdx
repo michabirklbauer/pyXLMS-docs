@@ -55,7 +55,7 @@ for k, v in parser_result.items():
 ```
 </Callout>
 
-The `parser.read()` method returns a dictionary with a set of specified keys and their values. We refer to this dictionary as a `parser_result` object. All `parser.read*` methods return such a `parser_result` object, you can read more about that here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_parser_result), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+The `parser.read()` method returns a dictionary with a set of specified keys and their values. We refer to this dictionary as a `parser_result` object. All `parser.read*` methods return such a `parser_result` object, you can read more about that here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_parser_result), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
 As you can see from the `parser_result` the XlinkX result file contained CSMs. We would be able to access those via `parser_result["crosslink-spectrum-matches"]`.
 
@@ -77,7 +77,7 @@ _ = transform.summary(parser_result)
 ```
 </Callout>
 
-With the `transform.summary()` method we can also print out some summary statistics about our read CSMs. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+With the `transform.summary()` method we can also print out some summary statistics about our read CSMs. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -118,7 +118,7 @@ for k, v in sample_csm.items():
 
 Using `parser_result["crosslink-spectrum-matches"][0]` we can get the first CSM of the file and take a closer look at that.
 
-Here is an example CSM, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_csm), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+Here is an example CSM, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_csm), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
 *****
 
@@ -136,7 +136,7 @@ parser_result = parser.read(
 ```
 </Callout>
 
-We can also as easily read a crosslink result file, notice how this time we also read a Microsoft Excel file instead of a txt file and don't even have to change anything. This is because when a filename is given, the parser will automatically detect the corresponding extension and use the correct sub-method. This behaviour is controlled by the `format` parameter in the [XlinkX parser](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xlinkx.read_xlinkx). More about that later...
+We can also as easily read a crosslink result file, notice how this time we also read a Microsoft Excel file instead of a txt file and don't even have to change anything. This is because when a filename is given, the parser will automatically detect the corresponding extension and use the correct sub-method. This behaviour is controlled by the `format` parameter in the [XlinkX parser](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read_xlinkx). More about that later...
 
 
 ```python copy
@@ -187,7 +187,7 @@ for k, v in sample_crosslink.items():
 
 Just like for the CSMs, we can also look into specific crosslinks using `parser_result["crosslinks"]`
 
-Here is an example crosslink, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_crosslink), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+Here is an example crosslink, you can learn more about the specific attributes and their values here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_crosslink), and here: [**data types specification**](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
 *****
 
@@ -342,7 +342,7 @@ parser_result = parser.read_xlinkx(
 ```
 </Callout>
 
-We can also read any XlinkX result file using the `parser.read_xlinkx()` method which allows a more nuanced control over reading XlinkX result files - even though theoretically everything can be done with the `parser.read()` function as well. You can read the documentation for the `parser.read_xlinkx()` method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xlinkx.read_xlinkx).
+We can also read any XlinkX result file using the `parser.read_xlinkx()` method which allows a more nuanced control over reading XlinkX result files - even though theoretically everything can be done with the `parser.read()` function as well. You can read the documentation for the `parser.read_xlinkx()` method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read_xlinkx).
 
 
 ```python copy
@@ -388,7 +388,7 @@ MODIFICATIONS
 </Callout>
 
 
-By default the XlinkX parser considers all modifications that are in `constants.MODIFICATIONS` as shown above for **pyXLMS version 1.5.1** - a full list of default modifications is given here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.constants.MODIFICATIONS).
+By default the XlinkX parser considers all modifications that are in `constants.MODIFICATIONS` as shown above for **pyXLMS version 1.5.1** - a full list of default modifications is given here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.constants.html#pyXLMS.constants.MODIFICATIONS).
 
 
 ```python copy
@@ -489,4 +489,4 @@ _ = transform.summary(parser_result)
 
 *****
 
-There are several other parameters that can be set, you can read more about them here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_xlinkx.read_xlinkx).
+There are several other parameters that can be set, you can read more about them here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read_xlinkx).
