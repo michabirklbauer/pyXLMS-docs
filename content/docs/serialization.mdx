@@ -67,7 +67,7 @@ _ = transform.summary(csms)
 ```
 </Callout>
 
-With the `transform.summary()` method we can also print out some summary statistics about our read crosslink-spectrum-matches. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+With the `transform.summary()` method we can also print out some summary statistics about our read crosslink-spectrum-matches. You can read more about the method here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -106,7 +106,7 @@ De-serialization, e.g. reading the created tables, is only available via text-ba
 transform.to_dataframe(csms).to_csv("csms.csv")
 ```
 
-Serialization to tables is facilitated via the `transform.to_dataframe()` function \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_dataframe.to_dataframe)\] which returns a [pandas](https://pandas.pydata.org/) `DataFrame` and can then be saved to disk via one of the pandas functions.
+Serialization to tables is facilitated via the `transform.to_dataframe()` function \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_dataframe)\] which returns a [pandas](https://pandas.pydata.org/) `DataFrame` and can then be saved to disk via one of the pandas functions.
 
 
 ```python copy
@@ -118,7 +118,7 @@ loaded_csms = parser.read_custom("csms.csv")
 ```
 </Callout>
 
-Using the function `parser.read_custom()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_custom.read_custom), [page](/docs/parsers/custom)\] we can the read back the data from the file...
+Using the function `parser.read_custom()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read_custom), [page](/docs/parsers/custom)\] we can the read back the data from the file...
 
 
 ```python copy
@@ -147,7 +147,7 @@ _ = transform.summary(loaded_csms)
 transform.to_dataframe(xls).to_parquet("xls.parquet")
 ```
 
-Serialization to tables is facilitated via the `transform.to_dataframe()` function \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_dataframe.to_dataframe)\] which returns a [pandas](https://pandas.pydata.org/) `DataFrame` and can then be saved to disk via one of the pandas functions.
+Serialization to tables is facilitated via the `transform.to_dataframe()` function \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_dataframe)\] which returns a [pandas](https://pandas.pydata.org/) `DataFrame` and can then be saved to disk via one of the pandas functions.
 
 
 ```python copy
@@ -159,7 +159,7 @@ loaded_xls = parser.read_custom("xls.parquet")
 ```
 </Callout>
 
-Using the function `parser.read_custom()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.parser_xldbse_custom.read_custom), [page](/docs/parsers/custom)\] we can the read back the data from the file...
+Using the function `parser.read_custom()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.parser.html#pyXLMS.parser.read_custom), [page](/docs/parsers/custom)\] we can the read back the data from the file...
 
 
 ```python copy
@@ -185,6 +185,10 @@ _ = transform.summary(loaded_xls)
 ## Serialization to JSON
 
 All pyXLMS objects - including whole `parser_result` objects - are serializable to and de-serializable from [JavaScript Object Notation](https://www.json.org/) (JSON) using the standard python `json` library.
+
+> [!IMPORTATNT]
+>
+> **If you are using pyXLMS v2.0.0 or newer you should use `transform.to_json()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_json)\] and `transform.from_json()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.from_json)\] instead! Using the python standard json library will not work anymore!**
 
 
 ```python copy
