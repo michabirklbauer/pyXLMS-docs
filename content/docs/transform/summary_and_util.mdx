@@ -67,7 +67,7 @@ csms_summary = transform.summary(csms)
 ```
 </Callout>
 
-We can get a summary of our crosslink-spectrum-matches by calling `transform.summary()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing summary statistics. You can read more about the `summary()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+We can get a summary of our crosslink-spectrum-matches by calling `transform.summary()` and passing the crosslink-spectrum-matches as the first argument. The function returns a dictionary containing summary statistics. You can read more about the `summary()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -167,7 +167,7 @@ Lastly, we can also get a summary of our `parser_result` by calling `transform.s
 
 ## Crosslink-Spectrum-Matches and Crosslinks as `pandas` DataFrames
 
-You might want to convert your crosslink-spectrum-matches and crosslinks to a `pandas.DataFrame` to work with [pandas](https://pandas.pydata.org/) or simply to save them to a file, for example to process them somewhere else. For this purpose the `transform.to_dataframe()` function exists: it takes a list of crosslink-spectrum-matches or crosslinks as input and returns them as a `pandas.DataFrame`. You can read more about the `to_dataframe()` function and its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_dataframe.to_dataframe).
+You might want to convert your crosslink-spectrum-matches and crosslinks to a `pandas.DataFrame` to work with [pandas](https://pandas.pydata.org/) or simply to save them to a file, for example to process them somewhere else. For this purpose the `transform.to_dataframe()` function exists: it takes a list of crosslink-spectrum-matches or crosslinks as input and returns them as a `pandas.DataFrame`. You can read more about the `to_dataframe()` function and its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_dataframe).
 
 
 ```python copy
@@ -205,7 +205,7 @@ _ = transform.summary(loaded_csms)
 </Callout>
 
 
-We can also load back our crosslink-spectrum-matches from the `pandas.DataFrame` using `transfrom.from_dataframe()`. You can read more about the `from_dataframe()` function and its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.from_dataframe.from_dataframe).
+We can also load back our crosslink-spectrum-matches from the `pandas.DataFrame` using `transfrom.from_dataframe()`. You can read more about the `from_dataframe()` function and its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.from_dataframe).
 
 
 ```python copy
@@ -248,7 +248,7 @@ _ = transform.summary(loaded_xls)
 
 ## Crosslink-Spectrum-Matches and Crosslinks in ProForma Notation
 
-If you want to export your crosslink-spectrum-matches or crosslinks to [ProForma](https://www.psidev.info/proforma) notation, you can do that with `transform.to_proforma()` which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_proforma.to_proforma).
+If you want to export your crosslink-spectrum-matches or crosslinks to [ProForma](https://www.psidev.info/proforma) notation, you can do that with `transform.to_proforma()` which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.to_proforma).
 
 Let's go through a few examples:
 
