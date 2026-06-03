@@ -134,7 +134,7 @@ xl = data.create_crosslink(
 )
 ```
 
-We can then create our crosslink with the `data.create_crosslink()` pyXLMS function by passing all the information to the corresponding arguments of the function. You can read more about the `create_crosslink()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_crosslink).
+We can then create our crosslink with the `data.create_crosslink()` pyXLMS function by passing all the information to the corresponding arguments of the function. You can read more about the `create_crosslink()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_crosslink).
 
 
 ```python copy
@@ -163,6 +163,12 @@ xl
 
 Our created crosslink is nothing else than a native python dictionary with specific keys - as laid out in the [pyXLMS data types specification](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
+> [!IMPORTANT]
+>
+> **Starting with pyXLMS v2.0.0 crosslinks are no longer dictionaries, they are**
+> **[Pydantic](https://pydantic.dev/docs/validation/latest/get-started/)**
+> **[BaseModel](https://pydantic.dev/docs/validation/latest/api/pydantic/base_model/#pydantic.BaseModel)**
+> **classes (but can still be accessed like dictionaries)!**
 
 ```python copy
 xl = data.create_crosslink(
@@ -217,7 +223,7 @@ xl = data.create_crosslink_min(
 )
 ```
 
-For convenience there is also a `data.create_crosslink_min()` function that allows fast creation of crosslinks with minimal input. Internally this is just a wrapper for `data.create_crosslink()` that sets all optional parameters to `None`. You can read more about the `create_crosslink_min()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_crosslink_min).
+For convenience there is also a `data.create_crosslink_min()` function that allows fast creation of crosslinks with minimal input. Internally this is just a wrapper for `data.create_crosslink()` that sets all optional parameters to `None`. You can read more about the `create_crosslink_min()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_crosslink_min).
 
 
 ```python copy
@@ -393,7 +399,7 @@ csm = data.create_csm(
 )
 ```
 
-We can then create our crosslink-spectrum-match with the `data.create_csm()` pyXLMS function by passing all the information to the corresponding arguments of the function. You can read more about the `create_csm()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_csm).
+We can then create our crosslink-spectrum-match with the `data.create_csm()` pyXLMS function by passing all the information to the corresponding arguments of the function. You can read more about the `create_csm()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_csm).
 
 
 ```python copy
@@ -433,6 +439,12 @@ csm
 
 Our created crosslink-spectrum-match is nothing else than a native python dictionary with specific keys - as laid out in the [pyXLMS data types specification](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
 
+> [!IMPORTANT]
+>
+> **Starting with pyXLMS v2.0.0 crosslink-spectrum-matches are no longer dictionaries, they are**
+> **[Pydantic](https://pydantic.dev/docs/validation/latest/get-started/)**
+> **[BaseModel](https://pydantic.dev/docs/validation/latest/api/pydantic/base_model/#pydantic.BaseModel)**
+> **classes (but can still be accessed like dictionaries)!**
 
 ```python copy
 csm = data.create_csm(
@@ -511,7 +523,7 @@ csm = data.create_csm_min(
 )
 ```
 
-For convenience there is also a `data.create_csm_min()` function that allows fast creation of crosslink-spectrum-matches with minimal input. Internally this is just a wrapper for `data.create_csm()` that sets all optional parameters to `None`. You can read more about the `create_csm_min()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_csm_min).
+For convenience there is also a `data.create_csm_min()` function that allows fast creation of crosslink-spectrum-matches with minimal input. Internally this is just a wrapper for `data.create_csm()` that sets all optional parameters to `None`. You can read more about the `create_csm_min()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_csm_min).
 
 
 ```python copy
@@ -611,7 +623,7 @@ The created crosslink-spectrum-match now also has the `'score'` entry set.
 xl = data.create_crosslink_from_csm(csm)
 ```
 
-We can also directly create a crosslink from a crosslink-spectrum-match by passing the crosslink-spectrum-match to the function `data.create_crosslink_from_csm()`. You can read more about the function and its parameter here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.html#pyXLMS.data.create_crosslink_from_csm).
+We can also directly create a crosslink from a crosslink-spectrum-match by passing the crosslink-spectrum-match to the function `data.create_crosslink_from_csm()`. You can read more about the function and its parameter here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.data.html#pyXLMS.data.create_crosslink_from_csm).
 
 
 ```python copy
@@ -639,3 +651,10 @@ xl
 
 
 Exactly as in our `data.create_crosslink()` function, our created crosslink is nothing else than a native python dictionary with specific keys - as laid out in the [pyXLMS data types specification](https://github.com/hgb-bin-proteomics/pyXLMS/blob/master/docs/data_types.md).
+
+> [!IMPORTANT]
+>
+> **Starting with pyXLMS v2.0.0 crosslinks are no longer dictionaries, they are**
+> **[Pydantic](https://pydantic.dev/docs/validation/latest/get-started/)**
+> **[BaseModel](https://pydantic.dev/docs/validation/latest/api/pydantic/base_model/#pydantic.BaseModel)**
+> **classes (but can still be accessed like dictionaries)!**
