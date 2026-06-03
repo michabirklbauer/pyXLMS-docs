@@ -53,7 +53,7 @@ xls = targets_only(validate(xls))
 
 > [!IMPORTANT]
 >
-> **For structure prediction with AlphaLink2 you would usually want to only consider high-confidence target crosslinks, either by pre-filtering in the search engine of your choice or via the pyXLMS functions `validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate.validate)\] and `targets_only()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.targets_only.targets_only)\]!**
+> **For structure prediction with AlphaLink2 you would usually want to only consider high-confidence target crosslinks, either by pre-filtering in the search engine of your choice or via the pyXLMS functions `validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate)\] and `targets_only()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.targets_only)\]!**
 
 
 ```python copy
@@ -64,7 +64,7 @@ cas9 = filter_proteins(xls, proteins=["Cas9"])["Both"]
 
 > [!IMPORTANT]
 >
-> **You also should filter your crosslinks to only contain residue pairs of your protein(s) of interest, for example with the `filter_proteins()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_proteins)\] function!**
+> **You also should filter your crosslinks to only contain residue pairs of your protein(s) of interest, for example with the `filter_proteins()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_proteins)\] function!**
 
 
 ```python copy
@@ -81,11 +81,11 @@ result = exporter.to_alphalink2(
 ```
 </Callout>
 
-The function `exporter.to_alphalink2()` exports a list of crosslinks to [AlphaLink2](https://doi.org/10.1038/s41467-024-51771-2) format for protein (complex) structure prediction with crosslink restraints. The tool AlphaLink2 is available via the link [github.com/Rappsilber-Laboratory/AlphaLink2](https://github.com/Rappsilber-Laboratory/AlphaLink2). The function `to_alphalink2()` takes in a list of crosslinks as input and additionally needs a FASTA file as input, containing the sequences of the protein/chains of interest that should be modelled by AlphaLink2. Furthermore, the AlphaLink2 format requires an `FDR` column for your crosslinks. This is controlled via the `annotated_fdr` parameter which accepts a single float as input or a list of float values. In our case we specified `annotated_fdr=0.01` which means that all crosslinks are labelled with a constant 1% false-discovery-rate (FDR). We could also pass a list of float values of equal length as our crosslinks to set individual FDR values for all crosslinks. You can read more about the `to_alphalink2()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_alphalink2.to_alphalink2).
+The function `exporter.to_alphalink2()` exports a list of crosslinks to [AlphaLink2](https://doi.org/10.1038/s41467-024-51771-2) format for protein (complex) structure prediction with crosslink restraints. The tool AlphaLink2 is available via the link [github.com/Rappsilber-Laboratory/AlphaLink2](https://github.com/Rappsilber-Laboratory/AlphaLink2). The function `to_alphalink2()` takes in a list of crosslinks as input and additionally needs a FASTA file as input, containing the sequences of the protein/chains of interest that should be modelled by AlphaLink2. Furthermore, the AlphaLink2 format requires an `FDR` column for your crosslinks. This is controlled via the `annotated_fdr` parameter which accepts a single float as input or a list of float values. In our case we specified `annotated_fdr=0.01` which means that all crosslinks are labelled with a constant 1% false-discovery-rate (FDR). We could also pass a list of float values of equal length as our crosslinks to set individual FDR values for all crosslinks. You can read more about the `to_alphalink2()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_alphalink2).
 
 > [!IMPORTANT]
 >
-> **If `transform.annotate_fdr()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr.annotate_fdr)\] has been run previously, the `to_alphalink2()` function will automatically use the pyXLMS annotated FDR for the AlphaLink2 `FDR` column and only use the parameter `annotated_fdr` as a backup. To override this behaviour pass `try_use_annotated_fdr=False` to the `to_alphalink2()` function which will explicitly use the `annotated_fdr` parameter value(s)!**
+> **If `transform.annotate_fdr()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr)\] has been run previously, the `to_alphalink2()` function will automatically use the pyXLMS annotated FDR for the AlphaLink2 `FDR` column and only use the parameter `annotated_fdr` as a backup. To override this behaviour pass `try_use_annotated_fdr=False` to the `to_alphalink2()` function which will explicitly use the `annotated_fdr` parameter value(s)!**
 
 
 ```python copy
@@ -165,7 +165,7 @@ Via `"Exported files"` we can access the names of all files that were written to
 
 ## Using the AlphaLink2 Exporter with `transform.annotate_fdr()`
 
-In order to retrieve more accurate false-discovery-rate (FDR) estimates for the `FDR` column in the AlphaLink2 crosslink table we can use the pyXLMS function `transform.annotate_fdr()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr.annotate_fdr), [page](/docs/transform/annotate_fdr)\] which will calculate FDR estimates for all crosslinks.
+In order to retrieve more accurate false-discovery-rate (FDR) estimates for the `FDR` column in the AlphaLink2 crosslink table we can use the pyXLMS function `transform.annotate_fdr()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr), [page](/docs/transform/annotate_fdr)\] which will calculate FDR estimates for all crosslinks.
 
 
 ```python copy
@@ -198,7 +198,7 @@ xls = annotate_fdr(xls)
 
 > [!IMPORTANT]
 >
-> **The function `transform.annotate_fdr()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr.annotate_fdr), [page](/docs/transform/annotate_fdr)\] needs to be run before any of the filtering steps in order to give accurate FDR estimates.**
+> **The function `transform.annotate_fdr()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr), [page](/docs/transform/annotate_fdr)\] needs to be run before any of the filtering steps in order to give accurate FDR estimates.**
 
 
 ```python copy
@@ -214,7 +214,7 @@ xls = targets_only(validate(xls))
 
 > [!IMPORTANT]
 >
-> **For structure prediction with AlphaLink2 you would usually want to only consider high-confidence target crosslinks, either by pre-filtering in the search engine of your choice or via the pyXLMS functions `validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate.validate)\] and `targets_only()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.targets_only.targets_only)\]!**
+> **For structure prediction with AlphaLink2 you would usually want to only consider high-confidence target crosslinks, either by pre-filtering in the search engine of your choice or via the pyXLMS functions `validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate)\] and `targets_only()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.targets_only)\]!**
 
 
 ```python copy
@@ -225,7 +225,7 @@ cas9 = filter_proteins(xls, proteins=["Cas9"])["Both"]
 
 > [!IMPORTANT]
 >
-> **You also should filter your crosslinks to only contain residue pairs of your protein(s) of interest, for example with the `filter_proteins()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_proteins)\] function!**
+> **You also should filter your crosslinks to only contain residue pairs of your protein(s) of interest, for example with the `filter_proteins()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_proteins)\] function!**
 
 
 ```python copy
@@ -243,7 +243,7 @@ result = exporter.to_alphalink2(
 ```
 </Callout>
 
-The function `exporter.to_alphalink2()` exports a list of crosslinks to [AlphaLink2](https://doi.org/10.1038/s41467-024-51771-2) format for protein (complex) structure prediction with crosslink restraints. The tool AlphaLink2 is available via the link [github.com/Rappsilber-Laboratory/AlphaLink2](https://github.com/Rappsilber-Laboratory/AlphaLink2). The function `to_alphalink2()` takes in a list of crosslinks as input and additionally needs a FASTA file as input, containing the sequences of the protein/chains of interest that should be modelled by AlphaLink2. Furthermore, the AlphaLink2 format requires an `FDR` column for your crosslinks. This is controlled via the `annotated_fdr` parameter which accepts a single float as input or a list of float values. In our case we specified `annotated_fdr=0.01` which means that all crosslinks are labelled with a constant 1% false-discovery-rate (FDR). We could also pass a list of float values of equal length as our crosslinks to set individual FDR values for all crosslinks. However, because we previously annotated the FDR for our crosslinks with `transform.annotate_fdr()` the value(s) passed via parameter `annotated_fdr` are only used as a backup, e.g. if the FDR calculated by `transform.annotate_fdr()` is `nan`. This behaviour is controlled by the parameter `try_use_annotated_fdr=True` which is by default `True`. You can read more about the `to_alphalink2()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_alphalink2.to_alphalink2).
+The function `exporter.to_alphalink2()` exports a list of crosslinks to [AlphaLink2](https://doi.org/10.1038/s41467-024-51771-2) format for protein (complex) structure prediction with crosslink restraints. The tool AlphaLink2 is available via the link [github.com/Rappsilber-Laboratory/AlphaLink2](https://github.com/Rappsilber-Laboratory/AlphaLink2). The function `to_alphalink2()` takes in a list of crosslinks as input and additionally needs a FASTA file as input, containing the sequences of the protein/chains of interest that should be modelled by AlphaLink2. Furthermore, the AlphaLink2 format requires an `FDR` column for your crosslinks. This is controlled via the `annotated_fdr` parameter which accepts a single float as input or a list of float values. In our case we specified `annotated_fdr=0.01` which means that all crosslinks are labelled with a constant 1% false-discovery-rate (FDR). We could also pass a list of float values of equal length as our crosslinks to set individual FDR values for all crosslinks. However, because we previously annotated the FDR for our crosslinks with `transform.annotate_fdr()` the value(s) passed via parameter `annotated_fdr` are only used as a backup, e.g. if the FDR calculated by `transform.annotate_fdr()` is `nan`. This behaviour is controlled by the parameter `try_use_annotated_fdr=True` which is by default `True`. You can read more about the `to_alphalink2()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.exporter.html#pyXLMS.exporter.to_alphalink2).
 
 > [!TIP]
 >

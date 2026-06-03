@@ -49,22 +49,22 @@ For easier access we assign our crosslink-spectrum-matches to the variable `csms
 
 ## Introduction
 
-pyXLMS offers estimated false-discovery-rate (FDR) annotation for crosslink-spectrum-matches and crosslinks via the `transform.annotate_fdr()` function. Since this function shares a similar interface to `transform.validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate.validate), [page](/docs/transform/validate)\] we also recommend the reader to get familiar with that function!
+pyXLMS offers estimated false-discovery-rate (FDR) annotation for crosslink-spectrum-matches and crosslinks via the `transform.annotate_fdr()` function. Since this function shares a similar interface to `transform.validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate), [page](/docs/transform/validate)\] we also recommend the reader to get familiar with that function!
 
 > [!IMPORTANT]
 >
-> **Please note that FDR annotation is not validation! If you are looking for FDR-based validation please use `transform.validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate.validate), [page](/docs/transform/validate)\] instead! FDR annotation will associate an estimated FDR value to all crosslink-spectrum-matches or crosslinks and is significantly slower (`O(n^2)` runtime) than validation!**
+> **Please note that FDR annotation is not validation! If you are looking for FDR-based validation please use `transform.validate()` \[[docs](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.validate), [page](/docs/transform/validate)\] instead! FDR annotation will associate an estimated FDR value to all crosslink-spectrum-matches or crosslinks and is significantly slower (`O(n^2)` runtime) than validation!**
 
 Before we run any kind of examples, let's have a look at the function and its parameters:
 
 ```python filename="src/pyXLMS/transform/annotate_fdr.py"
 def annotate_fdr(
-    data: List[Dict[str, Any]] | Dict[str, Any],
+    data: List[CrosslinkSpectrumMatch] | List[Crosslink] | ParserResult,
     formula: Literal["D/T", "(TD+DD)/TT", "(TD-DD)/TT"] = "D/T",
     score: Literal["higher_better", "lower_better"] = "higher_better",
     separate_intra_inter: bool = False,
     ignore_missing_labels: bool = False,
-) -> List[Dict[str, Any]] | Dict[str, Any]:
+) -> List[CrosslinkSpectrumMatch] | List[Crosslink] | ParserResult
 ```
 
 The function has 5 possible parameters:
@@ -112,7 +112,7 @@ _ = transform.summary(csms)
 ```
 </Callout>
 
-Before annotation, let's have a look at our crosslink-spectrum-matches using the `transform.summary()` function which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+Before annotation, let's have a look at our crosslink-spectrum-matches using the `transform.summary()` function which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -124,7 +124,7 @@ csms = transform.annotate_fdr(csms)
 ```
 </Callout>
 
-We can annotate our CSMs using the `transform.annotate_fdr()` function. For strict FDR annotation we can leave all optional parameters at their default values. You can read more about the `annotate_fdr()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr.annotate_fdr).
+We can annotate our CSMs using the `transform.annotate_fdr()` function. For strict FDR annotation we can leave all optional parameters at their default values. You can read more about the `annotate_fdr()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr).
 
 
 ```python copy
@@ -209,7 +209,7 @@ _ = transform.summary(xls)
 ```
 </Callout>
 
-Before annotation, let's have a look at our non-validated crosslinks using the `transform.summary()` function which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary.summary).
+Before annotation, let's have a look at our non-validated crosslinks using the `transform.summary()` function which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.summary).
 
 
 ```python copy
@@ -221,7 +221,7 @@ xls = transform.annotate_fdr(xls)
 ```
 </Callout>
 
-Similarly to annotating CSMs, we can annotate our crosslinks using the `transform.annotate_fdr()` function. For strict FDR annotation we can leave all optional parameters at their default values. You can read more about the `annotate_fdr()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr.annotate_fdr).
+Similarly to annotating CSMs, we can annotate our crosslinks using the `transform.annotate_fdr()` function. For strict FDR annotation we can leave all optional parameters at their default values. You can read more about the `annotate_fdr()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr).
 
 
 ```python copy
@@ -299,4 +299,4 @@ parser_result = transform.annotate_fdr(parser_result)
 ```
 </Callout>
 
-We can even annotate our complete `parser_result` using the `transform.annotate_fdr()` function as well. For annotation using a strict FDR estimation we can also leave all optional parameters at their default values. You can read more about the `annotate_fdr()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr.annotate_fdr).
+We can even annotate our complete `parser_result` using the `transform.annotate_fdr()` function as well. For annotation using a strict FDR estimation we can also leave all optional parameters at their default values. You can read more about the `annotate_fdr()` function and all its parameters here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_fdr).

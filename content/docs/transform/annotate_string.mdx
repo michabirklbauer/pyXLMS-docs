@@ -76,7 +76,7 @@ Because this function is calling the STRING API it requires internet access and 
 inter = transform.filter_crosslink_type(csms)["Inter"]
 ```
 
-We are now filtering for inter-links because only those will be annotated with STRING scores and interactions. For that we use the function `transform.filter_crosslink_type()` which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter.filter_crosslink_type).
+We are now filtering for inter-links because only those will be annotated with STRING scores and interactions. For that we use the function `transform.filter_crosslink_type()` which you can read more about here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.filter_crosslink_type).
 
 
 ```python copy
@@ -98,7 +98,7 @@ df.head()
 
 </Callout>
 
-Our `transform.annotate_string_scores()` function has no visible effects, it simply adds the STRING scores and interactions to the inter-link CSMs in `additional_information` via the keys `pyXLMS_annotated_STRING_score` and `pyXLMS_annotated_STRING_interactions`, here visualized by transforming the information to a `pandas.DataFrame`. You can read more about the `transform.annotate_string_scores()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_string_scores.annotate_string_scores).
+Our `transform.annotate_string_scores()` function has no visible effects, it simply adds the STRING scores and interactions to the inter-link CSMs in `additional_information` via the keys `pyXLMS_annotated_STRING_score` and `pyXLMS_annotated_STRING_interactions`, here visualized by transforming the information to a `pandas.DataFrame`. You can read more about the `transform.annotate_string_scores()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_string_scores).
 
 *****
 
@@ -138,7 +138,7 @@ df.head()
 
 </Callout>
 
-Again our `transform.annotate_string_scores()` function has no visible effects, it simply adds the STRING scores and interactions to the inter-link crosslinks in `additional_information` via the keys `pyXLMS_annotated_STRING_score` and `pyXLMS_annotated_STRING_interactions`, here visualized by transforming the information to a `pandas.DataFrame`. You can read more about the `transform.annotate_string_scores()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_string_scores.annotate_string_scores).
+Again our `transform.annotate_string_scores()` function has no visible effects, it simply adds the STRING scores and interactions to the inter-link crosslinks in `additional_information` via the keys `pyXLMS_annotated_STRING_score` and `pyXLMS_annotated_STRING_interactions`, here visualized by transforming the information to a `pandas.DataFrame`. You can read more about the `transform.annotate_string_scores()` function here: [**docs**](https://hgb-bin-proteomics.github.io/pyXLMS/pyXLMS.transform.html#pyXLMS.transform.annotate_string_scores).
 
 *****
 
